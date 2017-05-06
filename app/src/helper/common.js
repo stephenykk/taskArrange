@@ -11,11 +11,13 @@ const { apiBaseUrl } = getEnvConfig();
 
 export const getApi = (path, query = '') => {
   path = path.replace(/^\//, '');
+
   query = P.isObject(query) ? P.url.stringify(query) : query;
   query && (query = P.trim(query));
   if (query && !/^\?/.test(query)) {
     query = `?${query}`;
   }
+  
   return `${apiBaseUrl}${path}${query}`;
 };
 

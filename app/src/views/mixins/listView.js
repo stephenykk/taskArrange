@@ -7,13 +7,16 @@ export default {
       /* 需要指定的data */
       ctrl: 'dep', // controller eg: dep, user
       subject: '部门', // 表的主题 即：表的中文名称
+
       newRow: {}, // 新记录的默认值
       rules: {}, // 表单验证规则
+      
       needRename: false, // 行数据设为当前行时，是否需重命名字段 
       // eg: userId -> id, userNickName -> nick_name
       queryFromView: false, // 是否查视图表
 
       dialogKey: 'dialogVisible',
+      
       paging: {
         total: 0
       },
@@ -119,6 +122,7 @@ export default {
     defineReactive(this, this.dialogKey, false); // dialogVisible: false
     defineReactive(this, this.currentKey, P.extend({}, this.newRow)); // curdep: {}
     defineReactive(this, this.listKey, []); // deps: []
+
     defineReactive(this, 'isEdit', !!this[this.currentKey].id);
     defineReactive(this, 'title', (this.isEdit ? '编辑' : '创建') + this.subject);
       

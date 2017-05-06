@@ -1,7 +1,7 @@
 <template>
 
 <div class="user-table">
-  <el-table :data="users" stripe border class="w100p">
+  <el-table :data="data" stripe border class="w100p">
     <el-table-column type="index" label="No" width="60"></el-table-column>
     <el-table-column prop="userAvatar" label="头像">
       <template scope="scope">
@@ -16,8 +16,8 @@
     <el-table-column prop="roleCname" label="角色"></el-table-column>
     <el-table-column label="操作" width="150">
       <template scope="scope">
-            <el-button type="primary" plain size="small" @click="edit(scope.row)">编辑</el-button>
-            <el-button type="danger" plain size="small" @click="showConfirm(scope.row.userId)">删除</el-button>
+            <el-button type="primary" plain size="small" @click="editRow(scope.row)">编辑</el-button>
+            <el-button type="danger" plain size="small" @click="delRow(scope.row)">删除</el-button>
           </template>
     </el-table-column>
   </el-table>
@@ -27,9 +27,11 @@
 </div>
 </template>
 
-
 <script>
+  import tableMixin from 'mixins/table';
+
   export default {
-    name: 'UserTable'
+    name: 'UserTable',
+    mixins: [tableMixin]
   };
 </script>

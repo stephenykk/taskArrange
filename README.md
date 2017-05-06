@@ -26,3 +26,4 @@ wamp在8088端口设置的虚拟站点, 映射到ci框架的根目录提供接�
 doing
 --------
 1. 基础数据逻辑跑通   user dep role , crud
+user.vue 拆分为多个组件的组合,  table是来自视图的数据, dialog需要的数据最终将写入user表，所以有字段名转换的问题
