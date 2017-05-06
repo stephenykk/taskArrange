@@ -108,3 +108,8 @@ $lite-gray: #fafafa;
   font-size: 15px;
   border-bottom: 1px solid darken($lite-gray, 5%);
 }
+
+.el-dialog__body{
+  max-height: 350px;
+  overflow: auto;
+}

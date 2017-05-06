@@ -41,7 +41,9 @@
           <el-breadcrumb v-show="breadcrumb.length">
             <el-breadcrumb-item v-for="bread in breadcrumb" :to="{name: bread.name}" :key="bread.name">{{bread.text}}</el-breadcrumb-item>
           </el-breadcrumb>
+
           <router-view></router-view>
+          
         </div>
       </el-col>
 
@@ -72,8 +74,8 @@ export default {
       .then(res => {
         if (res.ok) {
           this.$message.success('注销成功..');
-          this.setUser({});
-          window.sessionStorage.removeItem('user');
+          this.setUser({}); // store
+          window.sessionStorage.removeItem('user'); // sessionStorage
         } else {
           this.$message.warning('注销失败..');
         }

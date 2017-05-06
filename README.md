@@ -22,3 +22,7 @@ wamp在8088端口设置的虚拟站点, 映射到ci框架的根目录提供接�
     # http://localhost:8080/api/xx 的请求会被转发到 8088 端口，返回接口数据
     # http://localhost:8088 通过ci提供api
     npm run dev 
+
+doing
+--------
+1. 基础数据逻辑跑通   user dep role , crud
