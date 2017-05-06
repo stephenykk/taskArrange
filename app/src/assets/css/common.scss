@@ -1,0 +1,110 @@
+html, body, .app{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+@mixin textAlign($direction: left) {
+  .text-#{$direction} {
+    text-align: $direction;
+  }
+}
+
+@mixin textAligns {
+  @each $direction in left, right, center {
+    @include textAlign($direction);
+  }
+}
+
+/*自定义函数的返回值，也可以用在属性名和选择器中，cool*/
+@function direction($dir) {
+  $r: left;
+  @if $dir == r { $r: right; }
+  @if $dir == l { $r: left; }
+  @if $dir == t { $r: top; }
+  @if $dir == b { $r: bottom; }
+  @return $r;
+}
+
+@mixin margin($dir, $n) {
+  .m#{$dir}#{$n} { 
+    margin-#{direction($dir)}: #{$n}px;
+  }
+}
+
+@mixin margins {
+  @each $dir in l, r, t, b {
+    $n: 40;
+    @while $n > 0 {
+      @include margin($dir, $n);
+      $n: $n - 5;
+    }
+  }
+}
+
+@mixin padding($dir, $n) {
+  .p#{$dir}#{$n} {
+    padding-#{direction($dir)}: #{$n}px;
+  }
+}
+
+@mixin paddings {
+  @each $dir in l, r, t, b {
+    $n: 40;
+    @while $n > 0 {
+      @include padding($dir, $n);
+      $n: $n - 5;
+    }
+  }
+}
+
+// ---------------------------------------------------
+@include textAligns();
+@include margins();
+@include paddings();
+
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+
+.clearfix{
+  &:after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/* colors */
+$nav-link-color: #bfcbd9;
+$nav-link-color-hover: lighten($nav-link-color, 20%);
+$nav-bg: #324157;
+$nav-link-bg-hover: darken($nav-bg, 5%);
+
+$lite-gray: #fafafa;
+
+.w100p{
+  width: 100%;
+}
+.w90p{
+  width: 90%;
+}
+.w80p{
+  width: 80%;
+}
+
+.toolbar{
+  padding: 10px 15px;
+  background: $lite-gray;
+  border:1px solid darken($lite-gray, 10%);
+  margin: 20px 0;
+}
+
+.el-breadcrumb{
+  padding: 15px 0;
+  font-size: 15px;
+  border-bottom: 1px solid darken($lite-gray, 5%);
+}
