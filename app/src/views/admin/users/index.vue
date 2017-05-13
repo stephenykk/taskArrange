@@ -5,10 +5,10 @@
     </div>
 
     <!-- 用户表 -->
-    <user-table subject="用户" idkey="userId" api="user/get" :query-view="true" @edit="edit"></user-table>
+    <user-table ref="table" subject="用户" idkey="userId" api="user/get" :query-view="true" @edit="edit"></user-table>
 
     <!-- 创建/编辑用户弹窗 -->
-    <user-modal title="用户" idkey="userId" :current="curUser" ref="modal"></user-modal>
+    <user-modal subject="用户" :current="curUser" ref="modal" save-api="user/insert" :edit-api="`user/update/${curUser.id}`" @save-done="reloadTable"></user-modal>
     
   </div>
 </template>
@@ -35,9 +35,16 @@
         this.curUser = {};
         this.showModal(true);
       },
+      getCurUser(viewRow) {
+        // user开始的字段，并转换为 nick_name 风格
+        return P.renameViewFields(viewRow, 'user');
+      },
       edit(row) {
-        this.curUser = row;
+        this.curUser = this.getCurUser(row);
         this.showModal(true);
+      },
+      reloadTable() {
+        this.$refs.table.load();
       }
     },
     components: {

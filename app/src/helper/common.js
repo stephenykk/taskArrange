@@ -11,11 +11,15 @@ const { apiBaseUrl } = getEnvConfig();
 
 export const getApi = (path, query = '') => {
   path = path.replace(/^\//, '');
+  if (P.isObject(query)) {
+    query = P.url.stringify(query);
+  }
 
-  query = P.isObject(query) ? P.url.stringify(query) : query;
-  query && (query = P.trim(query));
-  if (query && !/^\?/.test(query)) {
-    query = `?${query}`;
+  if (query) {
+    query = P.trim(query);
+    if (!(/^\?/.test(query))) {
+      query = `?${query}`;
+    }
   }
   
   return `${apiBaseUrl}${path}${query}`;
@@ -78,6 +82,9 @@ export const getBreadcrumb = (curRoute, routes) => {
 };
 
 export const renameField = (arr, oldName, newName) => {
+  if (P.isObject(arr)) { // not arr
+    arr = [arr];
+  }
   arr.forEach(item => {
     item[newName] = item[oldName];
     delete item[oldName];
@@ -115,22 +122,21 @@ export const resolvedCallback = (action, onsuccess, onerror) => {
 };
 
 // 重命名字段 视图表的字段名->基表的字段名
+// 默认去掉 非prefix开头的字段
 // eg: userNickName -> nick_name
-export const renameKeys = (obj, prefix) => {
-  const delPrefix = (str) => {
-    if (prefix) {
-      const re = new RegExp(`^${prefix}`, 'i');
-      str = str.replace(re, '');
-    }
-    return str;
-  };
+export const renameViewFields = (row, prefix, keep) => {
+  const re = new RegExp(`^${prefix}`, 'i');
+  const delPrefix = str => str.replace(re, '');
   const toDash = (str) => {
     const re = /([^_-])([A-Z])/g;
     return str.replace(re, '$1_$2').toLowerCase();
   };
 
   const ret = {};
-  P.eachKey(obj, (val, key) => {
+  P.eachKey(row, (val, key) => {
+    if (!keep && !re.test(key)) {
+      return;
+    }
     const newKey = toDash(delPrefix(key));
     ret[newKey] = val;
   });
@@ -147,7 +153,7 @@ const common = {
   renameField,
   pagingParams,
   resolvedCallback,
-  renameKeys
+  renameViewFields
 };
 
 export default common;

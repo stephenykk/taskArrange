@@ -1,6 +1,11 @@
 export default {
   props: {
-    idkey: String,
+    saveApi: String,
+    editApi: String,
+    idkey: {
+      type: String,
+      default: 'id'
+    },
     current: { // 当前数据记录
       type: Object,
       default() {

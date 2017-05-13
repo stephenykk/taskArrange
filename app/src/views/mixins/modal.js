@@ -1,5 +1,5 @@
 export default {
-  props: ['title'],
+  props: ['subject'],
   data() {
     return {
       visible: false

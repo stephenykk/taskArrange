@@ -176,6 +176,16 @@ export const defaults = (dest, src) => {
   return dest;
 };
 
+// remove null or undefined keys
+export const compact = (obj) => {
+  eachKey(obj, (val, key) => {
+    if (val == null) {
+      delete obj[key];
+    }
+  });
+  return obj;
+};
+
 /*-------------
   @url
 ---------------*/
@@ -220,7 +230,8 @@ const fns = (() => {
     mapKey,
     filterKey,
     defaults,
-    pluck
+    pluck,
+    compact
   };
   return {
     logs,
