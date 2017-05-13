@@ -8,17 +8,17 @@ class MY_Model extends CI_Model{
 	因为视图只用于查询，不太适用于直接更新数据
 	所以没有新建一个类
 	*/
-  
-  // 相关的视图表
-  public $vtable; 
+  public $vtable; // 相关的视图表
   
   public $queryFromView = false; // 是否从视图表查询
 	
-	// 唯一字段，新建时 确定是否能写入
-	public $uniqueField;
+	public $uniqueField; // 唯一字段，新建时 确定是否能写入
 
-  public $total; //表的总记录数 
-  public $vtotal; //视图表的总记录数 
+  public $total; // 表的总记录数 
+  public $vtotal; // 视图表的总记录数 
+
+	public $id = 'id'; // id字段名
+	public $vid; // 视图的id字段名
 
 	public function __construct() {
 		parent::__construct();
@@ -108,7 +108,7 @@ class MY_Model extends CI_Model{
 		return $result;
 	}
 
-	public function _find($condition='', $fields=array(), $limits=array())
+	public function _find($condition='', $fields=array(), $limits=array(), $order='')
 	{
     if (!empty($fields)) {
       $this->db->select($fields);
@@ -118,6 +118,12 @@ class MY_Model extends CI_Model{
       list($offset, $size) = $limits;
       $this->db->limit($size, $offset); // limit(size, offset)
     }
+
+		if (empty($order)) {
+			$order = ($this->queryFromView ? $this->vid : $this->id) . ' DESC'; // 默认id字段倒序
+		}
+
+		$this->db->order_by($order);
 
 		if ($condition) {
 			$query = $this->db->get_where($this->table, $condition);
@@ -138,9 +144,9 @@ class MY_Model extends CI_Model{
 		return $this->_save($data, $condition);
 	}
 
-	public function get($condition='', $fields=array(), $limits=array())
+	public function get($condition='', $fields=array(), $limits=array(), $order='')
 	{
-		$data = $this->_find($condition, $fields, $limits);
+		$data = $this->_find($condition, $fields, $limits, $order);
 
 		$res = appendData(count($data) > 0 ? success('get done..') : error('get fail..'), $data);
     // 若为分页请求 则加上总记录数

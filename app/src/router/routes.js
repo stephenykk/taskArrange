@@ -1,6 +1,6 @@
 import Hello from '@/components/Hello';
 import Home from '@/views/home';
-import Login from '@/views/home/login';
+import Login from '@/views/home/Login';
 
 const routes = [
   {
@@ -48,7 +48,7 @@ const routes = [
     path: '/task/create',
     component(resolve) {
       require.ensure([], () => {
-        resolve(require('@/views/task/create'));
+        resolve(require('@/views/task/Create'));
       }, 'task');
     },
     meta: {
@@ -60,7 +60,7 @@ const routes = [
     path: '/task/my',
     component(resolve) {
       require.ensure([], () => {
-        resolve(require('@/views/task/my'));
+        resolve(require('@/views/task/My'));
       }, 'task');
     },
     meta: {

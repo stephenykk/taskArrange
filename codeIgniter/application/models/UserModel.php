@@ -4,6 +4,8 @@ class UserModel extends MY_Model {
 	public $table = 'users';
   public $uniqueField = 'name';
   public $vtable = 'v_user';
+  public $id = 'id';
+  public $vid = 'userId';
 
 	public function __construct() {
 		parent::__construct();

@@ -21,7 +21,8 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report,
     // my own configs..
-    apiBaseUrl: 'http://localhost:8080/api/'
+    apiBaseUrl: 'http://localhost:8080/api/',
+    host: 'http://localhost:8088'
   },
   dev: {
     env: require('./dev.env'),
@@ -45,6 +46,7 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
     // my configs
-    apiBaseUrl: 'http://localhost:8080/api/'
+    apiBaseUrl: 'http://localhost:8080/api/',
+    host: 'http://localhost:8088'
   }
 }

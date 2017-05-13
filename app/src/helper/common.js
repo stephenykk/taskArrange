@@ -7,7 +7,7 @@ const getEnvConfig = () => {
   return config[isProduction ? 'build' : 'dev'];
 };
 
-const { apiBaseUrl } = getEnvConfig();
+const { apiBaseUrl, host } = getEnvConfig();
 
 export const getApi = (path, query = '') => {
   path = path.replace(/^\//, '');
@@ -109,6 +109,7 @@ export const pagingParams = paging => {
 
 // 返回ajax promise resolve的回调
 export const resolvedCallback = (action, onsuccess, onerror) => {
+  if (!action) { onsuccess.notips = true; }
   const callback = function (res) {
     if (res.ok) {
       !onsuccess.notips && Message.success(`${action}成功!`);
@@ -144,6 +145,8 @@ export const renameViewFields = (row, prefix, keep) => {
   return ret;
 };
 
+export const getAvatarUrl = path => (path ? host + path : path);
+
 const common = {
   getApi,
   checkTopNav,
@@ -153,7 +156,8 @@ const common = {
   renameField,
   pagingParams,
   resolvedCallback,
-  renameViewFields
+  renameViewFields,
+  getAvatarUrl
 };
 
 export default common;
