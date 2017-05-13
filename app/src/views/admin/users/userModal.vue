@@ -45,7 +45,7 @@
       </el-form-item>
 
       <el-form-item label="角色: " prop="role_id">
-        <el-input v-model="current.role_id" />
+        <ui-select api="role/get" :value="current.role_id" :fields="['id', 'cname']" @change="onSelectRole"></ui-select>
       </el-form-item>
 
     </el-form>
