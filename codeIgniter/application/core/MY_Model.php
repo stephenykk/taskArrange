@@ -124,11 +124,13 @@ class MY_Model extends CI_Model{
 		}
 
 		$this->db->order_by($order);
+		
+		$tbl = $this->queryFromView ? $this->vtable : $this->table;
 
 		if ($condition) {
-			$query = $this->db->get_where($this->table, $condition);
+			$query = $this->db->get_where($tbl, $condition);
 		} else {
-			$query = $this->db->get($this->queryFromView ? $this->vtable : $this->table);
+			$query = $this->db->get($tbl);
 		}
 
 		return $data = $query->result();

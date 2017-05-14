@@ -16,7 +16,13 @@
         </el-col>
         <el-col class="text-right nav-right" :span="4">
           <div v-if="user.userId">
-            <router-link  class="mr10 nick-name" to="/user">{{user.userNickname || user.userName}}</router-link>
+            <router-link  class="mr10 nick-name" to="/user">
+              <img v-if="user.userAvatar" class="avatar" :src="avatarUrl(user.userAvatar)" alt="avatar" :title="(user.userNickname || user.userName)+'-'+user.roleCname" />
+              <span v-else>
+                <small>{{user.roleCname ? user.roleCname + '-' : ''}}</small>
+                {{user.userNickname || user.userName}}
+              </span>
+            </router-link>
             <el-button type="text" class="logout-btn" @click="logout">注销</el-button>
           </div>
           <router-link class="login-btn" v-else to="/login">登录</router-link>
@@ -80,7 +86,8 @@ export default {
           this.$message.warning('注销失败..');
         }
       });
-    }
+    },
+    avatarUrl: P.getAvatarUrl
   },
   computed: {
     ...mapState(['asideSpan', 'user', 'subNavs', 'breadcrumb']),
@@ -140,6 +147,10 @@ export default {
         
         .nick-name{
           font-size: 20px;
+          small {
+            font-size: 15px;
+            margin-right: -8px;
+          }
         }
 
         .logout-btn, .nick-name, .login-btn{
@@ -152,6 +163,13 @@ export default {
 
         .el-menu-item{
           width: 100%;
+        }
+
+        .avatar{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          vertical-align: middle;
         }
       }
     }

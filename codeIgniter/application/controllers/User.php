@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('not directly access allow');
 
 class User extends MY_Controller {
 	public $model = 'userModel';
-  public $sessKeys = array('userId', 'userName', 'userNickname', 'depId', 'depName', 'roleId', 'roleName', 'roleCname', 'roleSysAdmin');
+  public $sessKeys = array('userId', 'userName', 'userNickname', 'userAvatar', 'depId', 'depName', 'roleId', 'roleName', 'roleCname', 'roleSysAdmin');
 
 	public function __construct()
 	{
@@ -19,8 +19,8 @@ class User extends MY_Controller {
       $vres = $this->mymodel->viewGetOne($condition);
 
       $sessData = array();
-      if ($vres.ok) {
-        $userData = $vres.data;
+      if ($vres['ok']) {
+        $userData = $vres['data'];
         $userInfo = toArray($userData);
         $sessData = pluck($userInfo, $this->sessKeys);
         $this->session->set_userdata($sessData);
