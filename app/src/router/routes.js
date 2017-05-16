@@ -56,6 +56,19 @@ const routes = [
     }
   },
   {
+    name: 'taskEdit',
+    path: '/task/edit/:id',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/task/Create'));
+      }, 'task');
+    },
+    meta: {
+      text: '编辑任务',
+      hide: true
+    }
+  },
+  {
     name: 'taskMy',
     path: '/task/my',
     component(resolve) {

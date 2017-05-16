@@ -21,15 +21,15 @@ export const getApi = (path, query = '') => {
       query = `?${query}`;
     }
   }
-  
+
   return `${apiBaseUrl}${path}${query}`;
 };
 
 // 检测一级导航 eg: /task /
-export const checkTopNav = route => route.path.match(/^\/(\w+)$/); 
+export const checkTopNav = route => route.path.match(/^\/(\w+)$/);
 
 // 检测二级导航 eg: /task/my
-export const check2ndNav = route => route.path.match(/^(\/\w+){2}$/); 
+export const check2ndNav = route => route.path.match(/^(\/\w+){2}(\/:\w*)?$/);
 
 // 获取当前一级导航下的二级导航
 export const get2ndNavs = (curRoute, routes) => {
@@ -40,14 +40,14 @@ export const get2ndNavs = (curRoute, routes) => {
     result = routes.filter(route => {
       let ok = false;
       if (check2ndNav(route)) {
-        ok = route.path.indexOf(curRoute.path) === 0;
+        ok = route.path.indexOf(curRoute.path) === 0 && !route.meta.hide;
       }
       return ok;
     });
   } else if (isHome) { // home
     result = [];
   } else { // not top nav
-    result = false;  
+    result = false;
   }
 
   return result;
@@ -62,18 +62,18 @@ export const getBreadcrumb = (curRoute, routes) => {
     names.push(curname.slice(0, re.lastIndex - 1));
   }
   names.push(curname);
-  
+
   let breads = routes.filter(route => names.includes(route.name))
-  .sort((a, b) => a.length - b.length)
-  .map(route => {
-    const o = {};
-    o.name = route.name;
-    o.text = route.meta.text;
-    return o;
-  });
+    .sort((a, b) => a.length - b.length)
+    .map(route => {
+      const o = {};
+      o.name = route.name;
+      o.text = route.meta.text;
+      return o;
+    });
 
   if (breads.length && breads[0].name !== 'home') {
-    breads.unshift({name: 'home', text: '首页'});
+    breads.unshift({ name: 'home', text: '首页' });
   } else {
     breads = [];
   }
@@ -101,7 +101,7 @@ export const pagingParams = paging => {
   if (P.isObject(paging)) {
     params = {
       pagenum: paging.currentPage,
-      pagesize: paging.pageSize          
+      pagesize: paging.pageSize
     };
   }
   return params;
@@ -110,7 +110,7 @@ export const pagingParams = paging => {
 // 返回ajax promise resolve的回调
 export const resolvedCallback = (action, onsuccess, onerror) => {
   if (!action) { onsuccess.notips = true; }
-  const callback = function (res) {
+  const callback = (res) => {
     if (res.ok) {
       !onsuccess.notips && Message.success(`${action}成功!`);
       onsuccess(res);
@@ -147,6 +147,49 @@ export const renameViewFields = (row, prefix, keep) => {
 
 export const getAvatarUrl = path => (path ? host + path : path);
 
+const oneDay = 1000 * 3600 * 24;
+export const pickerShortcuts = [{
+  text: '今天',
+  onClick(picker) {
+    picker.$emit('pick', new Date());
+  }
+}, {
+  text: '今周',
+  onClick(picker) {
+    const now = new Date();
+    const diff = 6 - now.getDay();
+    const weekend = now.setDate(now.getDate() + diff);
+    picker.$emit('pick', weekend);
+  }
+}, {
+  text: '本月',
+  onClick(picker) {
+    const now = new Date();
+    now.setMonth(now.getMonth() + 1);
+    now.setDate(1);
+    const next = now;
+    const lastDate = new Date(next - oneDay);
+    picker.$emit('pick', lastDate);
+  }
+}, {
+  text: '本季度',
+  onClick(picker) {
+    const now = new Date();
+    const m = now.getMonth() + 1;
+    const diff = (m % 3) ? (3 - (m % 3)) : 0;
+    now.setMonth((m - 1) + (diff + 1));
+    const lastDate = new Date(now.setDate(1) - oneDay);
+    picker.$emit('pick', lastDate);
+  }
+}, {
+  text: '今年',
+  onClick(picker) {
+    const now = new Date();
+    const lastDate = new Date(now.setFullYear(now.getFullYear() + 1, 0, 1) - oneDay);
+    picker.$emit('pick', lastDate);
+  }
+}];
+
 const common = {
   getApi,
   checkTopNav,
@@ -157,8 +200,9 @@ const common = {
   pagingParams,
   resolvedCallback,
   renameViewFields,
-  getAvatarUrl
+  getAvatarUrl,
+  pickerShortcuts
 };
 
 export default common;
-Object.assign(window.P, common, {common});
+Object.assign(window.P, common, { common });

@@ -212,6 +212,19 @@ export const url = {
   }
 };
 
+/*-----------
+ @date
+--------------*/
+export const formatDatetime = (dt) => {
+  dt = dt || new Date();
+  let dparts = [dt.getFullYear(), dt.getMonth() + 1, dt.getDate()];
+  let tparts = [dt.getHours(), dt.getMinutes(), dt.getSeconds()];
+  const d2 = n => (String(n).length > 1 ? n : `000${n}`.slice(-2));
+  dparts = dparts.map(part => d2(part)).join('-');
+  tparts = tparts.map(part => d2(part)).join(':');
+
+  return `${dparts} ${tparts}`;
+};
 
 const fns = (() => {
   const str = {
@@ -233,11 +246,16 @@ const fns = (() => {
     pluck,
     compact
   };
+  const date = {
+    formatDatetime
+  };
+
   return {
     logs,
     str,
     obj,
     url,
+    date,
     types
   };
 })();

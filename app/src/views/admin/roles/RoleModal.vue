@@ -33,6 +33,18 @@
           <el-checkbox v-model="current.task_remove" true-label="1" false-label="0"></el-checkbox>
         </el-form-item>
 
+        <el-form-item label="申报创建: ">
+          <el-checkbox v-model="current.apply_create" true-label="1" false-label="0"></el-checkbox>
+        </el-form-item>
+
+        <el-form-item label="申报编辑: ">
+          <el-checkbox v-model="current.apply_update" true-label="1" false-label="0"></el-checkbox>
+        </el-form-item>
+
+        <el-form-item label="申报删除: ">
+          <el-checkbox v-model="current.apply_remove" true-label="1" false-label="0"></el-checkbox>
+        </el-form-item>
+
         <el-form-item label="用户创建: ">
           <el-checkbox v-model="current.user_create" true-label="1" false-label="0"></el-checkbox>
         </el-form-item>
