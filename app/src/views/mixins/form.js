@@ -23,7 +23,7 @@ export default {
       return this.current[this.idkey];
     },
     isEdit() {
-      return !!this.id;
+      return !!this.current[this.idkey];
     }
   },
   methods: {

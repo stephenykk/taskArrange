@@ -48,7 +48,7 @@ const routes = [
     path: '/task/create',
     component(resolve) {
       require.ensure([], () => {
-        resolve(require('@/views/task/Create'));
+        resolve(require('@/views/task/TaskEdit'));
       }, 'task');
     },
     meta: {
@@ -60,7 +60,7 @@ const routes = [
     path: '/task/edit/:id',
     component(resolve) {
       require.ensure([], () => {
-        resolve(require('@/views/task/Create'));
+        resolve(require('@/views/task/TaskEdit'));
       }, 'task');
     },
     meta: {

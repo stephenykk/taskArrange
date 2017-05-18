@@ -52,8 +52,9 @@
    * ...
    * 指定了任务负责人，则 reciever, assigner, assign_time 传值
    */
+
   export default {
-    name: 'TaskCreateView',
+    name: 'TaskForm',
     mixins: [formMixin],
     props: {
       subject: {
@@ -71,16 +72,9 @@
         default: 'task/update'
       },
       current: {
-        type: Object,
+        type: [Object, null],
         default() {
-          return {
-            id: '',
-            creator: '',
-            status: 'created',
-            expect_start: '',
-            expect_end: '',
-            frequency: 'daily'
-          };
+          return {};
         }
       }
     },
@@ -129,15 +123,15 @@
         this.$message.error('请先登录..');
         return;
       }
-
       this.current.creator = this.user.userId;
     },
     mounted() {
-      const id = this.$route.params.id;
+      /* const id = this.$route.params.id;
       if (id) {
-        this.editApi += `/${id}`;
+        // this.editApi += `/${id}`;
         this.current[this.idkey] = id;
-      }
+        this.current = Object.assign({}, this.current);
+      } */
     }
   };
 </script>

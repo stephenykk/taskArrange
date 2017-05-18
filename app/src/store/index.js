@@ -9,7 +9,8 @@ const state = {
   asideSpan: 0, // asie nav span
   subNavs: [], // 当前二级导航列表
   user: {}, // 登录后 保存用户基本信息
-  breadcrumb: [] // 面包屑数据
+  breadcrumb: [], // 面包屑数据
+  currentTask: {} // 当前编辑的任务
 };
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
   },
   [types.setBreadcrumb](state, breads) {
     state.breadcrumb = breads;
+  },
+  [types.setCurrentTask](state, task) {
+    state.currentTask = task;
   }
 };
 

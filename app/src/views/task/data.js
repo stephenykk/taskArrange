@@ -17,7 +17,28 @@ const requiredFields = {
   frequency: '任务类型'
 };
 
+const statusMap = {
+  created: '已创建',
+  assigned: '已分派',
+  recieved: '已接收',
+  doing: '进行中',
+  finish: '已完成',
+  delay: '延迟'
+};
+
+
+const newTask = {
+  id: '',
+  creator: '',
+  status: 'created',
+  expect_start: '',
+  expect_end: '',
+  frequency: 'daily'
+};
+
 export default {
   taskTypes,
-  requiredFields
+  requiredFields,
+  statusMap,
+  newTask
 };
