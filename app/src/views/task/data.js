@@ -26,6 +26,21 @@ const statusMap = {
   delay: '延迟'
 };
 
+const statusSteps = [
+ {status: 'created', text: '创建'},
+ {status: 'assigned', text: '分派'},
+ {status: 'recieved', text: '接受'},
+ {status: 'doing', text: '开始'},
+ {status: 'finish', text: '结束'},
+ {status: 'delay', text: '延迟'}
+];
+
+const statusTimeFields = {
+  assigned: 'assign_time',
+  recieved: 'recieve_time',
+  doing: 'task_start',
+  finish: 'task_end'
+};
 
 const newTask = {
   id: '',
@@ -40,5 +55,7 @@ export default {
   taskTypes,
   requiredFields,
   statusMap,
+  statusSteps,
+  statusTimeFields,
   newTask
 };

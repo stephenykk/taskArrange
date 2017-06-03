@@ -61,6 +61,7 @@ module.exports = {
     'one-var': 0,
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
-    'no-cond-assign': 0
+    'no-cond-assign': 0,
+    'camelcase': 0
   }
 }

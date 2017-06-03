@@ -81,8 +81,20 @@ const routes = [
     }
   },
   {
+    name: 'userTask',
+    path: '/user/task',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/task/My'));
+      }, 'task');
+    },
+    meta: {
+      text: '我的任务'
+    }
+  },
+  {
     name: 'apply',
-    path: '/apply',
+    path: '/apply', // applyCreate
     component(resolve) {
       require.ensure([], () => {
         resolve(require('@/views/apply'));
@@ -93,15 +105,64 @@ const routes = [
     }
   },
   {
-    name: 'applyList',
-    path: '/apply/list',
+    name: 'applyEdit',
+    path: '/apply/edit/:id',
     component(resolve) {
       require.ensure([], () => {
         resolve(require('@/views/apply'));
       }, 'apply');
     },
     meta: {
+      text: '故障编辑',
+      hide: true
+    }
+  },
+  {
+    name: 'applyCreate',
+    path: '/apply/create',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/apply'));
+      }, 'apply');
+    },
+    meta: {
+      text: '故障填写'
+    }
+  },
+  {
+    name: 'applyList',
+    path: '/apply/list',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/apply/List'));
+      }, 'apply');
+    },
+    meta: {
       text: '故障管理'
+    }
+  },
+  {
+    name: 'applyMy',
+    path: '/apply/my',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/apply/My'));
+      }, 'apply');
+    },
+    meta: {
+      text: '我的故障'
+    }
+  },
+  {
+    name: 'userApply',
+    path: '/user/apply',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/apply/My'));
+      }, 'apply');
+    },
+    meta: {
+      text: '我的故障'
     }
   },
   {
@@ -117,15 +178,39 @@ const routes = [
     }
   },
   {
-    name: 'signList',
-    path: '/sign/list',
+    name: 'signDuty',
+    path: '/sign/duty',
     component(resolve) {
       require.ensure([], () => {
         resolve(require('@/views/sign'));
       }, 'sign');
     },
     meta: {
-      text: '签到管理'
+      text: '考勤打卡'
+    }
+  },
+  {
+    name: 'signList',
+    path: '/sign/list',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/sign/List'));
+      }, 'sign');
+    },
+    meta: {
+      text: '我的签到'
+    }
+  },
+  {
+    name: 'userSign',
+    path: '/user/sign',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/sign/List'));
+      }, 'sign');
+    },
+    meta: {
+      text: '我的签到'
     }
   },
   {
@@ -149,7 +234,8 @@ const routes = [
       }, 'user');
     },
     meta: {
-      text: '用户信息'
+      text: '我的信息',
+      order: 0
     }
   },
   {

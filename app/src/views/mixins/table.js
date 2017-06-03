@@ -8,9 +8,13 @@ export default {
       type: Boolean,
       default: true
     },
-    idkey: String, 
+    idkey: {
+      type: String,
+      default: 'id'
+    }, 
     subject: String, // 主题
-    queryView: Boolean // 查询视图
+    queryView: Boolean, // 查询视图
+    queryCondition: Object // 查询条件
   },
   data() {
     return {
@@ -41,6 +45,8 @@ export default {
     load(notips) {
       const params = this.params;
       const data = this.queryView ? { view: true } : {};
+      const cond = this.queryCondition;
+      (typeof cond === 'object') && Object.assign(data, cond);
 
       const action = `获取${this.subject}数据`;
       const onsuccess = (res) => {
@@ -77,7 +83,12 @@ export default {
         .then(P.resolvedCallback('删除', () => this.load(true)));
     }
   },
-  created() {
-    this.active && this.load();
+  watch: {
+    active() {
+      this.active && this.load();
+    }
+  },
+  mounted() {
+    this.active && this.$store.state.user.userId && this.load();
   }
 };

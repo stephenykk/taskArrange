@@ -7,12 +7,12 @@
         <el-col :span="20">
           <el-menu-item index="/" class="logo-div"><img class="logo" src="~@/assets/logo.png" alt="logo"></el-menu-item>
           <el-menu-item index="/" >首页</el-menu-item>
-          <el-menu-item index="/task">任务分派</el-menu-item>
-          <el-menu-item index="/apply">故障申报</el-menu-item>
+          <el-menu-item v-if="$store.getters.canUpdateTask" index="/task">任务分派</el-menu-item>
+          <el-menu-item v-if="$store.getters.canUpdateApply || $store.getters.canCreateApply"  index="/apply">故障申报</el-menu-item>
           <el-menu-item index="/sign">每日签到</el-menu-item>
           <el-menu-item index="/user">个人中心</el-menu-item>
-          <el-menu-item index="/stat">统计汇总</el-menu-item>
-          <el-menu-item index="/admin">后台管理</el-menu-item>
+          <el-menu-item v-if="$store.getters.canDataStat" index="/stat">统计汇总</el-menu-item>
+          <el-menu-item v-if="$store.getters.isSysAdmin" index="/admin">后台管理</el-menu-item>
         </el-col>
         <el-col class="text-right nav-right" :span="4">
           <div v-if="user.userId">
@@ -82,6 +82,7 @@ export default {
           this.$message.success('注销成功..');
           this.setUser({}); // store
           window.sessionStorage.removeItem('user'); // sessionStorage
+          this.$router.push({name: 'home'});
         } else {
           this.$message.warning('注销失败..');
         }
@@ -146,9 +147,9 @@ export default {
         padding-right: 20px;
         
         .nick-name{
-          font-size: 20px;
+          font-size: 15px;
           small {
-            font-size: 15px;
+            font-size: 13px;
             margin-right: -8px;
           }
         }

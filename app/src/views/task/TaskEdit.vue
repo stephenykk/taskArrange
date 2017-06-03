@@ -25,20 +25,22 @@
     components: {
       TaskForm
     },
-    created() {
-      const id = this.$route.params.id;
-      this.taskid = id;
-      if (this.$route.name === 'taskEdit' && !this.currentTask.id) { // can not get from vuex
-        axios.post(P.getApi('task/get'), {id})
-                  .then(P.resolvedCallback('获取任务', res => {
-                    // P.log(res);
-                    this.setCurrentTask(res.data[0]);
-                  }));
-      }
+    beforeRouteEnter(to, from, next) {
+      const id = to.params.id;
+      next(vm => {
+        vm.taskid = id;
+        if (vm.$route.name === 'taskEdit' && !vm.currentTask.id) { // can not get from vuex
+          axios.post(P.getApi('task/get'), {id})
+                    .then(P.resolvedCallback('获取任务', res => {
+                      // P.log(res);
+                      vm.setCurrentTask(res.data[0]);
+                    }));
+        }
 
-      if (this.$route.name === 'taskCreate') {
-        this.setCurrentTask(newTask);
-      }
+        if (vm.$route.name === 'taskCreate') {
+          vm.setCurrentTask(newTask);
+        }
+      });
     }
   };
 </script>

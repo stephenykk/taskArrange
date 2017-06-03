@@ -12,7 +12,7 @@ class MY_Model extends CI_Model{
   
   public $queryFromView = false; // 是否从视图表查询
 	
-	public $uniqueField; // 唯一字段，新建时 确定是否能写入
+  public $uniqueField; // 唯一字段，新建时 确定是否能写入
 
   public $total; // 表的总记录数 
   public $vtotal; // 视图表的总记录数 
@@ -150,7 +150,7 @@ class MY_Model extends CI_Model{
 	{
 		$data = $this->_find($condition, $fields, $limits, $order);
 
-		$res = appendData(count($data) > 0 ? success('get done..') : error('get fail..'), $data);
+		$res = appendData(count($data) > 0 ? success('get done..') : success('no data..'), $data);
     // 若为分页请求 则加上总记录数
     if (!empty($limits)) {
       $res['total'] = $this->total;

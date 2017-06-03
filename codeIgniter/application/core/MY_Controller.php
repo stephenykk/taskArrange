@@ -7,13 +7,35 @@ class MY_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+	    date_default_timezone_set('Asia/Shanghai');
 
 		// $this->output->enable_profiler(true); // debug;
 
 		$this->load->model($this->model, 'mymodel');
 	}
 	
+	public function checkLogin()
+	{
+		if (!$this->session->userId) {
+			output(error('require login..'));
+			die();
+		}
+	}
 
+	public function checkSysAdmin()
+	{
+		if (!$this->session->roleSysAdmin) {// '0' is false in php 
+			output(error('require sysAdmin right..'));
+			die();
+		}
+	}
+
+	public function checkAuth($rightKey) {
+		if (!($this->session->$rightKey || $this->session->roleSysAdmin)) {
+			output(error("require $rightKey right.."));
+			die();
+		}
+	}
 
 	public function index()
 	{
@@ -27,8 +49,9 @@ class MY_Controller extends CI_Controller {
 		output($res);
 	}
 
+
 	public function update($id='')
-	{
+	{ 
 		checkRequired($id, 'need id..');
 
 		$data = inputData($this);

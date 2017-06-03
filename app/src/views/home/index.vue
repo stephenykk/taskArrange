@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <h1>welcome to task arrange system</h1>
+    <h1>欢迎使用任务分派系统~</h1>
     
   </div>
 </template>
@@ -12,8 +12,9 @@
 </script>
 
 <style scoped lang="scss">
-  $size: 50px;
+  $size: 30px;
   h1{
+    font-weight: normal;
     font-size: $size;
   }
 </style>

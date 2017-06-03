@@ -49,7 +49,13 @@ export const get2ndNavs = (curRoute, routes) => {
   } else { // not top nav
     result = false;
   }
-
+  if (Array.isArray(result)) {
+    result.sort((a, b) => {
+      const order1 = a.meta.order !== undefined ? a.meta.order : 1;
+      const order2 = b.meta.order !== undefined ? b.meta.order : 1;
+      return order1 - order2;
+    });
+  }
   return result;
 };
 
@@ -190,6 +196,27 @@ export const pickerShortcuts = [{
   }
 }];
 
+export const nextStatus = (curStatus, statusSteps) => {
+  let nextStatus = {};
+  const steps = statusSteps.slice(0, -1);
+  const index = P.findIndex(steps, step => step.status === curStatus);
+  if (index + 1 === steps.length) {
+    nextStatus = false;
+  } else {
+    nextStatus = steps[index + 1];
+  }
+  return nextStatus;
+};
+
+export const checkLogin = (vm) => {
+  if (!vm.$store.state.user.userId) {
+    vm.$message.warning('请先登录..');
+    setTimeout(() => {
+      vm.$router.push({name: 'login'});
+    }, 2000);
+  }
+};
+
 const common = {
   getApi,
   checkTopNav,
@@ -201,7 +228,8 @@ const common = {
   resolvedCallback,
   renameViewFields,
   getAvatarUrl,
-  pickerShortcuts
+  pickerShortcuts,
+  checkLogin
 };
 
 export default common;

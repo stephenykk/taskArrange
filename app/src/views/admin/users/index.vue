@@ -8,7 +8,7 @@
     <user-table ref="table" subject="用户" idkey="userId" api="user/get" :query-view="true" @edit="edit"></user-table>
 
     <!-- 创建/编辑用户弹窗 -->
-    <user-modal subject="用户" :current="current" ref="modal" save-api="user/insert" :edit-api="`user/update/${current.id}`" @save-done="reloadTable"></user-modal>
+    <user-modal subject="用户" ref="modal" :current="current" @save-done="reloadTable"></user-modal>
     
   </div>
 </template>
@@ -37,6 +37,9 @@
     components: {
       UserModal,
       UserTable
+    },
+    created() {
+      P.checkLogin(this);
     }
   };
 </script>

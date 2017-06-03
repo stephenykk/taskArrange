@@ -30,6 +30,9 @@
     components: {
       DepTable,
       DepModal
+    },
+    created() {
+      P.checkLogin(this);
     }
   };
 </script>

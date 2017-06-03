@@ -40,6 +40,37 @@ const mutations = {
 const getters = {
   mainSpan(state) {
     return 24 - state.asideSpan;
+  },
+  canUpdateTask(state) {
+    const {user} = state;
+    return user.roleTaskCreate || user.roleSysAdmin;
+  },
+  canCreateTask(state) {
+    const {user} = state;
+    return user.roleTaskCreate || user.roleSysAdmin;
+  },
+  canRemoveTask(state) {
+    const {user} = state;
+    return user.roleTaskRemove || user.roleSysAdmin;
+  },
+  canUpdateApply(state) {
+    const {user} = state;
+    return user.roleApplyUpdate || user.roleSysAdmin;
+  },
+  canCreateApply(state) {
+    const {user} = state;
+    return user.roleApplyCreate || user.roleSysAdmin;
+  },
+  canRemoveApply(state) {
+    const {user} = state;
+    return user.roleApplyRemove || user.roleSysAdmin;
+  },
+  isSysAdmin(state) {
+    return !!state.user.roleSysAdmin;
+  },
+  canDataStat(state) {
+    const {user} = state;
+    return user.roleDataStat || user.roleSysAdmin;
   }
 };
 

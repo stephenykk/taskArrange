@@ -52,7 +52,9 @@ export default {
 
     },
     postSave() {
-      this.hide();
+      if (this.hide && typeof this.hide === 'function') {
+        this.hide();
+      }
     }
   }
 };

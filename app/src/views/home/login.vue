@@ -109,11 +109,16 @@
           .then(res => {
             if (res.ok) {
               this.$message.success('登录成功! 欢迎使用..');
-
+              const data = res.data;
+              P.eachKey(data, (val, key) => {
+                if (/^role/.test(key) && ['0', '1'].includes(val)) {
+                  data[key] = Number(val);
+                }
+              });
               // store in sessionStorage
-              window.sessionStorage.setItem('user', JSON.stringify(res.data));
+              window.sessionStorage.setItem('user', JSON.stringify(data));
               // store in vuex
-              this.setUser(res.data);
+              this.setUser(data);
               
               this.resetForm('loginForm');
               this.$router.push('/');

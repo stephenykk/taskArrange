@@ -22,6 +22,22 @@ class UserModel extends MY_Model {
     }
   }
 
+  public function iters($isFree=false) {
+    $sql = 'select userId, userName from v_user where roleTaskRecieve = 1';
+    // $sql = 'select userId, userName, roleName, roleCname, roleTaskRecieve from v_user where roleTaskRecieve = 1';
+    $freeCond = " and userId not in (select reciever from applies where status = 'doing' union select reciever from tasks where status = 'doing')";
+
+    if ($isFree) {
+      $sql .= $freeCond;
+    }
+
+    $query = $this->db->query($sql);
+    $data = $query->result();
+    $res = appendData($isFree ? success('fetch free iters done..') : success('fetch all iters done..'), $data);
+    return $res;
+  }
+
+
   /*public function viewGet($condition='')
   {
     if (empty($condition)) {

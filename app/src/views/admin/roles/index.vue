@@ -43,12 +43,20 @@
     },
     methods: {
       getCurrent(row) {
+        P.eachKey(row, (val, key) => {
+          if (P.isNil(val)) {
+            row[key] = '0';
+          }
+        });
         return row;
       }
     },
     components: {
       RoleTable,
       RoleModal
+    },
+    created() {
+      P.checkLogin(this);
     }
   };
 </script>

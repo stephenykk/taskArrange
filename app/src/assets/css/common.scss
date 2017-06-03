@@ -69,7 +69,15 @@ html, body, .app{
 .fr{
   float: right;
 }
-
+.d-ib {
+  display: inline-block;
+}
+.d-b{
+  display: block;
+}
+.d-i{
+  display: inline;
+}
 .clearfix{
   &:after{
     content: '';
@@ -116,4 +124,13 @@ $lite-gray: #fafafa;
 
 .el-table th, .el-table td {
   text-align: center;
+}
+
+h1{
+  font-weight: normal;
+  font-size: 22px !important;
+}
+
+.el-table__fixed-right{
+  background: #fff;
 }

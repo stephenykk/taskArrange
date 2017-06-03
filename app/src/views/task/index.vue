@@ -20,6 +20,9 @@
         this.setCurrentTask(row);
         this.$router.push({name: 'taskEdit', params: {id: row.id}});
       }
+    },
+    created() {
+      P.checkLogin(this);
     }
   };
 </script>
@@ -28,5 +31,6 @@
   $size: 30px;
   h1{
     font-size: $size;
+    font-weight: normal;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="ui-select">
-    <el-select v-model="selected" clearable filterable @change="handleChange" placeholder="请选择">
+    <el-select v-model="selected" :disabled="disabled" clearable filterable @change="handleChange" placeholder="请选择">
       <el-option v-for="item in list" :key="item[valueKey]" :label="item[labelKey]" :value="item[valueKey]"></el-option>
     </el-select>
   </div>
@@ -12,6 +12,7 @@
     props: {
       value: null,
       api: String,
+      disabled: Boolean,
       fields: {
         type: Array,
         default() {

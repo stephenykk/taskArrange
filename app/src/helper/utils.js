@@ -106,6 +106,19 @@ export const isNull = types.isNull;
 export const isNil = types.isNil;
 
 /*-------------
+  @arr
+---------------*/
+export const findIndex = (arr, fn) => {
+  let index = -1;
+  arr.forEach((val, i) => {
+    if (fn(val, i, arr) && index === -1) {
+      index = i;
+    }
+  });
+  return index;
+};
+
+/*-------------
   @obj
 ---------------*/
 export const eachKey = (obj, fn) => {
@@ -217,6 +230,9 @@ export const url = {
 --------------*/
 export const formatDatetime = (dt) => {
   dt = dt || new Date();
+  if (!(dt instanceof Date)) {
+    dt = new Date(dt);
+  }
   let dparts = [dt.getFullYear(), dt.getMonth() + 1, dt.getDate()];
   let tparts = [dt.getHours(), dt.getMinutes(), dt.getSeconds()];
   const d2 = n => (String(n).length > 1 ? n : `000${n}`.slice(-2));
@@ -246,6 +262,9 @@ const fns = (() => {
     pluck,
     compact
   };
+  const arr = {
+    findIndex
+  };
   const date = {
     formatDatetime
   };
@@ -254,6 +273,7 @@ const fns = (() => {
     logs,
     str,
     obj,
+    arr,
     url,
     date,
     types

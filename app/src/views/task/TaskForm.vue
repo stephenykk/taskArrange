@@ -11,7 +11,8 @@
       </el-form-item>
       
       <el-form-item required label="负责人:">
-        <ui-select api="user/get" :value="current.reciever" @change="onSelectUser"></ui-select>
+        <ui-select :disabled="isEdit && !reassign" api="user/get" :value="current.reciever" @change="onSelectUser" class="d-ib"></ui-select>
+        <el-checkbox v-if="isEdit" v-model="reassign">重新分派</el-checkbox> 
       </el-form-item>
       
       <el-form-item required label="任务类型:">
@@ -83,7 +84,8 @@
         taskTypes,
         pickerOpts: {
           shortcuts: P.pickerShortcuts
-        }
+        },
+        reassign: false
       };
     },
     computed: {
@@ -95,16 +97,26 @@
       },
       preSave(data) {
         P.eachKey(requiredFields, (text, field) => {
-
           if (!data[field]) {
             throw new Error(`${text}不能为空..`);
           }
         });
+        if (!this.isEdit) { // create 
+          data.creator = this.user.userId;
+          if (data.reciever) { // 选择负责人..
+            data.assigner = this.user.userId;
+            data.assign_time = P.formatDatetime();
+            data.status = 'assigned';
+          }
+        } else { // edit and 勾选重新分派
+          if (this.reassign) {
+            data.assigner = this.user.userId;
+            data.assign_time = P.formatDatetime();
+          }
 
-        if (data.reciever) { // 选择负责人..
-          data.assigner = data.creator;
-          data.assign_time = P.formatDatetime();
-          data.status = 'assigned';
+          ['assignerName', 'creatorName', 'recieverName'].forEach(field => {
+            delete data[field];
+          });
         }
 
         // date obj -> date str
