@@ -151,17 +151,18 @@ class MY_Model extends CI_Model{
 		$data = $this->_find($condition, $fields, $limits, $order);
 
 		$res = appendData(count($data) > 0 ? success('get done..') : success('no data..'), $data);
-    // 若为分页请求 则加上总记录数
-    if (!empty($limits)) {
-      $res['total'] = $this->total;
-    }
+        
+        // 若为分页请求 则加上总记录数
+        if (!empty($limits)) {
+          $res['total'] = $this->total;
+        }
 
-    return $res;
+        return $res;
 	}
 
 	public function getOne($condition='') {
 		$res = $this->get($condition);
-		if ($res['ok']) {
+		if ($res['ok'] && count($res['data']) > 0) {
 			$res['data'] = $res['data'][0]; // object arr -> obj
 		}
 		return $res;

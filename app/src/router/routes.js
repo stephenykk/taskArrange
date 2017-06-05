@@ -198,6 +198,18 @@ const routes = [
       }, 'sign');
     },
     meta: {
+      text: '签到记录'
+    }
+  },
+  {
+    name: 'signMy',
+    path: '/sign/my',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/sign/My'));
+      }, 'sign');
+    },
+    meta: {
       text: '我的签到'
     }
   },

@@ -14,7 +14,7 @@ class UserModel extends MY_Model {
   public function login($condition)
   {
     $res = $this->getOne($condition);
-    if ($res['ok']) {
+    if ($res['ok'] && !empty($res['data'])) {
       $data = $res['data'];
       return $data->id;
     } else {

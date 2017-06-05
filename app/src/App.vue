@@ -9,8 +9,8 @@
           <el-menu-item index="/" >首页</el-menu-item>
           <el-menu-item v-if="$store.getters.canUpdateTask" index="/task">任务分派</el-menu-item>
           <el-menu-item v-if="$store.getters.canUpdateApply || $store.getters.canCreateApply"  index="/apply">故障申报</el-menu-item>
-          <el-menu-item index="/sign">每日签到</el-menu-item>
-          <el-menu-item index="/user">个人中心</el-menu-item>
+          <el-menu-item index="/sign" v-if="$store.getters.hasTaskRight">每日签到</el-menu-item>
+          <el-menu-item index="/user" v-if="$store.state.user.userId">个人中心</el-menu-item>
           <el-menu-item v-if="$store.getters.canDataStat" index="/stat">统计汇总</el-menu-item>
           <el-menu-item v-if="$store.getters.isSysAdmin" index="/admin">后台管理</el-menu-item>
         </el-col>

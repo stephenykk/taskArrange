@@ -30,6 +30,7 @@ wamp在8088端口设置的虚拟站点, 映射到ci框架的根目录提供接�
     # cofing/routes.php又定义了默认控制器
     # 默认控制器的index方法，返回 app/dist/index.html
     # 所以当访问 http://localhost:8088时，默认控制器会返回 app/dist/index.html
+    # wamp开启 `rewrite_mod` 模块, 通过 .htaccess 定义改写规则，从而隐藏CI入口文件 index.php,  让api看起来像 /api/users/get 更自然一点.
 done
 --------
 1. 基础数据逻辑跑通   user dep role , crud
@@ -41,5 +42,5 @@ user.vue 拆分为多个组件的组合,  table是来自视图的数据, dialog�
 
 doing
 ----------
-1. 补卡 和 统计 
+1. 补卡(给谁补哪天的上班或下班卡) 和 统计 
 

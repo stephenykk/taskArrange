@@ -1,13 +1,13 @@
 <template>
   <div class="sign-list-page">
-    <h1 class="text-center">全部签到记录</h1>
-    <sign-table api="duty/get" subject="签到" :query-view="true" ref="table"></sign-table>
+    <h1 class="text-center">我的签到记录</h1>
+    <my-sign-table api="duty/get" subject="签到" :query-view="false" :query-condition="{user_id: user.userId}" ref="table"></my-sign-table>
   </div>
 </template>
 
 <script>
   import {mapState} from 'vuex';
-  import SignTable from './SignTable';
+  import MySignTable from './MySignTable';
 
   export default {
     name: 'SignListPage',
@@ -15,7 +15,7 @@
       ...mapState(['user'])
     },
     components: {
-      SignTable
+      MySignTable
     },
     created() {
       P.checkLogin(this);

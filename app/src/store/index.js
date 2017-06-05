@@ -43,7 +43,16 @@ const getters = {
   },
   canUpdateTask(state) {
     const {user} = state;
-    return user.roleTaskCreate || user.roleSysAdmin;
+    return user.roleTaskCreate || user.roleTaskRecieve
+    || user.roleTaskAssign || user.roleTaskRemove || user.roleSysAdmin;
+  },
+  canAssignTask(state) {
+    const {user} = state;
+    return user.roleTaskAssign || user.roleSysAdmin;
+  },
+  canRecieveTask(state) {
+    const {user} = state;
+    return user.roleTaskRecieve || user.roleSysAdmin;
   },
   canCreateTask(state) {
     const {user} = state;
@@ -71,6 +80,12 @@ const getters = {
   canDataStat(state) {
     const {user} = state;
     return user.roleDataStat || user.roleSysAdmin;
+  },
+  /* eslint-disable no-unused-vars */
+  hasTaskRight(state) {
+    const {user} = state;
+    return user.roleTaskCreate || user.roleTaskRemove
+           || user.roleTaskRecieve || user.roleTaskAssign || user.roleSysAdmin;
   }
 };
 

@@ -16,6 +16,16 @@ class Duty extends MY_Controller {
     return count($query->result()) > 0;
   }
 
+  public function hasSomeoneSignedSomeday()
+  {
+    $data = inputData($this);
+    $date = $data['date'];
+    $userId = $data['userId'];
+    $sql = "select * duties where DATE(sign_in) = DATE($date) and user_id = $userId";
+    $query = $this->db->query($sql);
+    return count($query->result()) > 0;
+  }
+
   public function checksigned()
   {
     $signedToday = $this->hasSignedToday();
@@ -27,12 +37,31 @@ class Duty extends MY_Controller {
   public function sign($type='sign_in')
   {
     if ($this->hasSignedToday()) {
-        $data = array($type => date('Y-m-d H:i:s'));
+        // $data = array($type => date('Y-m-d H:i:s'));
+        $data = array('sign_out' => date('Y-m-d H:i:s'));// 若已签到，则再次签到就是签出
         $cond = "DATE(sign_in)=CURDATE() and user_id={$this->session->userId}";
         $res = $this->mymodel->update($data, $cond);
     } else {
         $data = array('user_id' => $this->session->userId, 'sign_in' => date('Y-m-d H:i:s'));
         $res = $this->mymodel->insert($data);
+    }
+    output($res);
+  }
+
+  public function fillsign()
+  {
+    $data = inputData($this);
+    $date = $data['date'];
+    $userId = $data['userId'];
+    $meno = empty($data['meno']) ? '' : $data['meno'];
+
+    if ($this->hasSomeoneSignedSomeday()) {
+      $data = array('sign_out' => $date, 'meno' => $meno);
+      $cond = "DATE(sign_in)=DATE($date) and user_id = $userId";
+      $res = $this->mymodel->update($data, $cond);
+    } else {
+      $data = array('user_id' => $userId, 'sign_in' => $date, 'meno' => $meno);
+      $res = $this->mymodel->insert($data);
     }
     output($res);
   }
@@ -49,7 +78,7 @@ class Duty extends MY_Controller {
 
   public function update($id='')
   {
-    $this->checkSysAdmin();
+    $this->checkAuth('roleDutyCreate');
     parent::update($id);
   }
   
