@@ -323,6 +323,18 @@ const routes = [
     }
   },
   {
+    name: 'adminDuty',
+    path: '/admin/duty',
+    component(resolve) {
+      require.ensure([], () => {
+        resolve(require('@/views/admin/duty'));
+      }, 'admin');
+    },
+    meta: {
+      text: '考勤补卡'
+    }
+  },
+  {
     name: 'Hello-Test',
     path: '/hello',
     component: Hello,
