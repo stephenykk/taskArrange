@@ -20,9 +20,13 @@ class Task extends MY_Controller {
   {
     $this->checkLogin();
     $data = inputData($this);
-    if ($data['title']) { // 更新记录
+
+    $hasTitle = array_key_exists('title', $data);
+    $hasStatus = array_key_exists('status', $data);
+    
+    if ($hasTitle) { // 更新记录
         $this->checkAuth('roleTaskCreate'); // 要求任务创建权限
-    } else if ($data['status']){
+    } else if ($hasStatus){
         // 没有title字段，有status字段，认为是更新状态 要求有接受任务权限
         // 'created','assigned','recieved','doing','finish','delay'
         if ($data['status'] === 'assigned') {

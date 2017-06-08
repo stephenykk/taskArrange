@@ -21,7 +21,7 @@ class Duty extends MY_Controller {
     $data = inputData($this);
     $date = $data['date'];
     $userId = $data['userId'];
-    $sql = "select * duties where DATE(sign_in) = DATE($date) and user_id = $userId";
+    $sql = "select * from duties where DATE(sign_in) = DATE('$date') and user_id = $userId";
     $query = $this->db->query($sql);
     return count($query->result()) > 0;
   }
@@ -31,6 +31,14 @@ class Duty extends MY_Controller {
     $signedToday = $this->hasSignedToday();
     $res = jsonData(true, $signedToday ? '今天已上班签到' : '今天未上班签到');
     $res = appendData($res, array('signed' => $signedToday));
+    output($res);
+  }
+
+  public function checksignedon()
+  {
+    $signed = $this->hasSomeoneSignedSomeday();
+    $res = jsonData(true, $signed ? '当天已上班签到' : '当天未上班签到');
+    $res = appendData($res, array('signed' => $signed));
     output($res);
   }
 
@@ -57,7 +65,7 @@ class Duty extends MY_Controller {
 
     if ($this->hasSomeoneSignedSomeday()) {
       $data = array('sign_out' => $date, 'meno' => $meno);
-      $cond = "DATE(sign_in)=DATE($date) and user_id = $userId";
+      $cond = "DATE(sign_in)=DATE('$date') and user_id = $userId";
       $res = $this->mymodel->update($data, $cond);
     } else {
       $data = array('user_id' => $userId, 'sign_in' => $date, 'meno' => $meno);
