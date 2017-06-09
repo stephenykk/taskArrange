@@ -79,6 +79,10 @@
     },
     methods: {
       onSelectDep(id) {
+        if (!id) {
+          return;
+        }
+        
         this.current.dep_id = id;
         axios.post(P.getApi('dep/get'), {id})
              .then(P.resolvedCallback('获取部门', res => {
