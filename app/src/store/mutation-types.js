@@ -5,3 +5,4 @@ export const setUser = 'setUser';
 export const setSubNavs = 'setSubNavs';
 export const setBreadcrumb = 'setBreadcrumb';
 export const setCurrentTask = 'setCurrentTask';
+export const setServertime = 'setServertime';

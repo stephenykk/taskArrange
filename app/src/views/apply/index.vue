@@ -1,7 +1,7 @@
 <template>
   <div class="apply-page">
     <h1 class="text-center">故障服务申请</h1>
-    <apply-form :edit-api="`apply/update/${curApply.id}`" :current="curApply"></apply-form>
+    <apply-form :edit-api="`apply/update/${curApply.id}`" :current="curApply" @save-done="onSaved"></apply-form>
   </div>
 </template>
 
@@ -19,6 +19,11 @@
       };
     },
     methods: {
+      onSaved() {
+        if (!this.curApply.id) { // after create reset form
+          this.curApply = Object.assign({}, newApply);
+        }
+      },
       getApply() {
         const {name, params} = this.$route;
         if (name === 'applyEdit' && params.id) {

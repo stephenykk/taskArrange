@@ -4,15 +4,22 @@ defined('BASEPATH') or exit('not directly access allow');
 class Home extends CI_Controller {
 	public $fav = 'sleeping';
 
+    public function __construct()
+    {
+        parent::__construct();
+        date_default_timezone_set('asia/shanghai');
+    }
+
 	public function index() {
         // readfile('app/index.html');
 		readfile('app/dist/index.html');
 	}
 
-  public function hi()
-  {
-    return 'hihi';
-  }
+    public function time()
+    {
+        $res = appendData(success('server time done..'), array('servertime' => date('Y/m/d H:i:s')));
+        output($res);
+    }
 
 	public function someTest($a, $b='') {
 

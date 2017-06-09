@@ -217,6 +217,11 @@ export const checkLogin = (vm) => {
   }
 };
 
+export const d2 = (n) => {
+  n -= 0;
+  return (n < 10 ? '0' : '') + n;
+};
+
 const common = {
   getApi,
   checkTopNav,
@@ -229,7 +234,8 @@ const common = {
   renameViewFields,
   getAvatarUrl,
   pickerShortcuts,
-  checkLogin
+  checkLogin,
+  d2
 };
 
 export default common;

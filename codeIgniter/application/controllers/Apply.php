@@ -8,7 +8,11 @@ class Apply extends MY_Controller {
   {
     parent::__construct();
   }
-
+  public function hello($value='')
+  {
+    echo 'hello';
+  }
+  
   public function insert()
   {
     $this->checkAuth('roleApplyCreate');
@@ -38,8 +42,7 @@ class Apply extends MY_Controller {
         } else {
             $this->checkAuth('roleTaskRecieve');
         }
-        
-        parent::update($id);
     }
+    parent::update($id);
   }
 }

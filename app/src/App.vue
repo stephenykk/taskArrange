@@ -70,9 +70,10 @@ export default {
       userInfo = JSON.parse(userInfo);
       this.setUser(userInfo);
     }
+    this.getServerTime();
   },
   methods: {
-    ...mapMutations(['setUser']),
+    ...mapMutations(['setUser', 'setServertime']),
     logout() {
       // 前后端清除用户相关的session
       axios
@@ -87,6 +88,12 @@ export default {
           this.$message.warning('注销失败..');
         }
       });
+    },
+    getServerTime() {
+      axios.get(P.getApi('home/time'))
+           .then(P.resolvedCallback('', res => {
+             this.setServertime(res.data.servertime);
+           }));
     },
     avatarUrl: P.getAvatarUrl
   },

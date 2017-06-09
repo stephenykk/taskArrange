@@ -21,8 +21,8 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report,
     // my own configs..
-    apiBaseUrl: 'http://localhost:8088/api/',
-    host: 'http://localhost:8088'
+    apiBaseUrl: '/api/',
+    host: ''
   },
   dev: {
     env: require('./dev.env'),

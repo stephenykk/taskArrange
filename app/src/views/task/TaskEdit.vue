@@ -1,5 +1,5 @@
 <template>
-  <task-form :edit-api="`task/update/${taskid}`" :current="currentTask"></task-form>
+  <task-form :edit-api="`task/update/${taskid}`" :current="currentTask" @save-done="onSaved"></task-form>
 </template>
 
 <script>
@@ -20,7 +20,12 @@
       ...mapState(['currentTask'])
     },
     methods: {
-      ...mapMutations(['setCurrentTask'])
+      ...mapMutations(['setCurrentTask']),
+      onSaved() {
+        if (!this.taskid) { // after create reset form
+          this.setCurrentTask(Object.assign({}, newTask));
+        }
+      }
     },
     components: {
       TaskForm
@@ -38,7 +43,7 @@
         }
 
         if (vm.$route.name === 'taskCreate') {
-          vm.setCurrentTask(newTask);
+          vm.setCurrentTask(Object.assign({}, newTask));
         }
       });
     }

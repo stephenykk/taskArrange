@@ -10,7 +10,8 @@ const state = {
   subNavs: [], // 当前二级导航列表
   user: {}, // 登录后 保存用户基本信息
   breadcrumb: [], // 面包屑数据
-  currentTask: {} // 当前编辑的任务
+  currentTask: {}, // 当前编辑的任务
+  servertime: '' // 服务器时间
 };
 
 const mutations = {
@@ -34,6 +35,12 @@ const mutations = {
   },
   [types.setCurrentTask](state, task) {
     state.currentTask = task;
+  },
+  [types.setServertime](state, dt) {
+    if (P.isString(dt)) {
+      dt = new Date(dt);
+    }
+    state.servertime = dt;
   }
 };
 

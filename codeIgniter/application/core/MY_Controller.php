@@ -36,11 +36,11 @@ class MY_Controller extends CI_Controller {
 			die();
 		}
 	}
-
+	/*
 	public function index()
 	{
 		echoln("$this->model controller..");
-	}
+	}*/
 
 	public function insert()
 	{

@@ -2,13 +2,19 @@
   <div class="sign-page">
     <!-- <h1 class="text-center">上下班打卡</h1> -->
     <div class="text-center">
+      <clock :date="servertime"></clock>
       <el-button class="mt40" size="large" type="success" @click="duty(beDuty ? 'off' : 'on')">{{beDuty ? '下班': '上班'}}打卡</el-button>
+      <el-button size="large" type="success">上午上班打卡</el-button>
+      <el-button size="large" type="success">上午下班打卡</el-button>
+      <el-button size="large" type="info">下午上班打卡</el-button>
+      <el-button size="large" type="info">下午上班打卡</el-button>
     </div>
   </div>
 </template>
 
 <script>
   import {mapState} from 'vuex';
+  import Clock from './Clock';
 
   export default {
     name: 'SignPage',
@@ -16,7 +22,7 @@
       return {beDuty: false};
     },
     computed: {
-      ...mapState(['user'])
+      ...mapState(['user', 'servertime'])
     },
     methods: {
       onduty() {
@@ -43,6 +49,9 @@
                this.beDuty = true;
              }));
       }
+    },
+    components: {
+      Clock
     },
     created() {
       P.checkLogin(this);

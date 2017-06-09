@@ -36,7 +36,7 @@
   </div>
 </template>
 
-<script>
+<script>  
 
   import {mapState} from 'vuex';
   import formMixin from 'mixins/form';
