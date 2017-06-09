@@ -1,13 +1,14 @@
 <template>
   <div class="sign-page">
-    <!-- <h1 class="text-center">上下班打卡</h1> -->
     <div class="text-center">
-      <clock :date="servertime"></clock>
+      <clock></clock>
       <el-button class="mt40" size="large" type="success" @click="duty(beDuty ? 'off' : 'on')">{{beDuty ? '下班': '上班'}}打卡</el-button>
+      <!-- 
       <el-button size="large" type="success">上午上班打卡</el-button>
       <el-button size="large" type="success">上午下班打卡</el-button>
       <el-button size="large" type="info">下午上班打卡</el-button>
       <el-button size="large" type="info">下午上班打卡</el-button>
+      -->
     </div>
   </div>
 </template>
@@ -22,7 +23,7 @@
       return {beDuty: false};
     },
     computed: {
-      ...mapState(['user', 'servertime'])
+      ...mapState(['user'])
     },
     methods: {
       onduty() {

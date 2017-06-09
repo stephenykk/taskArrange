@@ -8,9 +8,11 @@
 </template>
 
 <script>
+  import {mapState, mapMutations} from 'vuex';
+
   export default {
     name: 'Clock',
-    props: ['date'],
+    // props: ['date'],
     data() {
       return {
         now: new Date(),
@@ -18,6 +20,7 @@
       };
     },
     computed: {
+      ...mapState(['servertime']),
       y() {
         return this.now.getFullYear();
       },
@@ -38,9 +41,10 @@
       }
     },
     methods: {
+      ...mapMutations(['setServertime']),
       clockStart() {
-        P.log(this.date);
-        this.now = this.date;
+        P.log(this.servertime);
+        this.now = this.servertime;
         const run = () => {
           this.now = new Date(this.now.getTime() + 1000);
           this.timer = setTimeout(run, 1000);
@@ -49,10 +53,20 @@
       },
       clockStop() {
         clearTimeout(this.timer);
+      },
+      getServerTime(cb) {
+        axios.get(P.getApi('home/time'))
+          .then(P.resolvedCallback('', res => {
+            this.setServertime(res.data.servertime);
+            cb && setTimeout(cb, 1000);
+          }));
       }
     },
     created() {
-      this.clockStart();
+      this.getServerTime(() => {
+        this.clockStart();
+      });
+
     }
   };
 </script>
@@ -61,7 +75,7 @@
   .clock {
     text-align: center;
     .clock-inner {
-      margin: 30px auto 0;
+      margin: 30px auto;
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
