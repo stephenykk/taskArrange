@@ -60,6 +60,7 @@ class Duty extends MY_Controller {
   }
   public function smartsign()
   {
+    $this->checkLogin();
     $signed = $this->hasSignedToday();
     if ($signed['done']) {
       
@@ -67,6 +68,7 @@ class Duty extends MY_Controller {
   }
   public function sign($type='sign_in')
   {
+    $this->checkLogin();
     if ($this->hasSignedToday()['done']) {
         // $data = array($type => date('Y-m-d H:i:s'));
         $data = array('sign_out' => date('Y-m-d H:i:s'));// 若已签到，则再次签到就是签出

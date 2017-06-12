@@ -17,9 +17,9 @@
       <el-table-column prop="recieve_time" label="接受时间" width="120"></el-table-column>
       <el-table-column prop="task_start" label="开始时间" width="120"></el-table-column>
       <el-table-column prop="task_end" label="完成时间" width="120"></el-table-column>
-      <el-table-column prop="expect_start" label="期望开始" width="120" fixed="right"></el-table-column>
-      <el-table-column prop="expect_end" label="期望结束" width="120" fixed="right"></el-table-column>
-      <el-table-column label="操作" width="100" fixed="right">
+      <el-table-column prop="expect_start" label="期望开始" width="120"></el-table-column>
+      <el-table-column prop="expect_end" label="期望结束" width="120"></el-table-column>
+      <el-table-column label="操作" width="100">
         <template scope="scope">
           <el-button :type="hasNextStatus(scope.row.status) ? 'primary': 'success'" @click="updateTask(scope.row)">
           {{scope.row.status | nextStatusText}}</el-button>
