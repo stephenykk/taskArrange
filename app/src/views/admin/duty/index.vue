@@ -11,7 +11,11 @@
         <el-input class="meno-ta" type="textarea" :rows="3" v-model="data.meno"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="fillSign">补{{beduty ? '下班' : '上班'}}卡</el-button>
+        <!-- <el-button type="primary" @click="fillSign">补{{beduty ? '下班' : '上班'}}卡</el-button> -->
+        <el-button type="primary" @click="fillSign('sign_in')">上午上班补卡</el-button>
+        <el-button type="primary" @click="fillSign('sign_out')">上午下班补卡</el-button>
+        <el-button type="info" @click="fillSign('sign_in2')">下午上班补卡</el-button>
+        <el-button type="info" @click="fillSign('sign_out2')">下午下班补卡</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -50,13 +54,13 @@
       onSelectUser(id) {
         this.data.userId = id;
       },
-      fillSign() { // 补卡
+      fillSign(field = 'sign_in') { // 补卡
         this.$refs.form.validate(ok => {
           if (ok) {
             let {userId, date, meno} = this.data;
             date = P.formatDatetime(date);
   
-            axios.post(P.getApi('duty/fillSign'), {userId, date, meno})
+            axios.post(P.getApi('duty/smartfillSign'), {userId, date, meno, field})
                  .then(P.resolvedCallback('补卡', () => {
                    this.beduty = true;
                  }));

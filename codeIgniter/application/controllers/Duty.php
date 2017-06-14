@@ -24,7 +24,7 @@ class Duty extends MY_Controller {
     // print_r($arr2);
     foreach ($arr2 as $n) echo $n . "---> ";
 
-    echo '-------------------\r\n';
+    echo "-------------------\r\n";
     $mdate = $this->moffdate();
     $adate = $this->aondate();
     $adate->sub(new DateInterval('PT30M'));
@@ -32,7 +32,7 @@ class Duty extends MY_Controller {
     var_dump($adate < $mdate);
     echo $adate->format('Y-m-d H:i:s');
 
-    echo '-------------------\r\n';
+    echo "-------------------\r\n";
     $k = 10;
     switch($k) {
       case $k < 4:
@@ -42,8 +42,13 @@ class Duty extends MY_Controller {
       echo 'case 2';
       break;
     }
-
-
+    
+    echo "-------------------\r\n";
+    $str = 'someone how do you';
+    $r = str_replace('how', 'when', $str);
+    echo $r;
+    echo "-----------\r\n";
+    echo $str;
   }
 
   public function moffdate()
@@ -229,6 +234,33 @@ class Duty extends MY_Controller {
       $data = array('user_id' => $userId, 'sign_in' => $date, 'meno' => $meno);
       $res = $this->mymodel->insert($data);
     }
+    output($res);
+  }
+
+  public function smartfillsign()
+  {
+    $data = inputData($this);
+    $date = $data['date'];
+    $userId = $data['userId'];
+    $signField = isset($data['field']) ? $data['field'] : 'sign_in';
+    $meno = empty($data['meno']) ? '' : $data['meno'];
+
+    $signed = $this->hasSomeoneSignedSomeday();
+    if ($signed['done']) {
+      $row = $signed['data'];
+      if (!empty($row->$signField)) {
+        output(error('当前已经' . $this->signType($signField)));
+        return;
+      } else {
+        $data = array($signField => $date, 'meno' => $meno);
+        $cond = "id={$row->id}";
+        $res = $this->mymodel->update($data, $cond);
+      }
+    } else {
+      $data = array('user_id' => $userId, $signField => $date, 'meno' => $meno);
+      $res = $this->mymodel->insert($data); 
+    }
+    $res['msg'] = str_replace('打卡', '补卡成功', $this->signType($signField));
     output($res);
   }
 
