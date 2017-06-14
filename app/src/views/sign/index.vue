@@ -2,13 +2,10 @@
   <div class="sign-page">
     <div class="text-center">
       <clock></clock>
-      <el-button class="mt40" size="large" type="success" @click="duty(beDuty ? 'off' : 'on')">{{beDuty ? '下班': '上班'}}打卡</el-button>
-      <!-- 
-      <el-button size="large" type="success">上午上班打卡</el-button>
-      <el-button size="large" type="success">上午下班打卡</el-button>
-      <el-button size="large" type="info">下午上班打卡</el-button>
-      <el-button size="large" type="info">下午上班打卡</el-button>
-      -->
+      <!-- <el-button class="mt40" size="large" type="success" @click="duty(beDuty ? 'off' : 'on')">{{beDuty ? '下班': '上班'}}打卡</el-button> -->
+      
+      <el-button size="large" type="success" @click="sign">打卡</el-button>
+     
     </div>
   </div>
 </template>
@@ -49,6 +46,18 @@
                P.warn(res);
                this.beDuty = true;
              }));
+      },
+      sign() {
+        if (!this.checkLogin()) return;
+
+        axios.get(P.getApi('duty/smartsign'))
+             .then(res => {
+               if (res.ok) {
+                 this.$message.success(`${res.msg}成功!`);
+               } else {
+                 this.$message.error(`${res.msg}`);
+               }
+             });
       }
     },
     components: {
