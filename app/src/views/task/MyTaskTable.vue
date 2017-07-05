@@ -44,6 +44,12 @@
   export default {
     name: 'TaskTable',
     mixins: [tableMixin],
+    props: {
+      order: {
+        type: String,
+        default: 'frequency desc, recieverName asc'
+      }
+    },
     methods: {
       hasNextStatus(curStatus) {
         return P.nextStatus(curStatus, statusSteps);
