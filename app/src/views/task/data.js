@@ -4,7 +4,7 @@ const taskTypes = [
   {label: '每天任务', value: 'daily'},
   {label: '每周任务', value: 'weekly'},
   {label: '每月任务', value: 'monthly'},
-  {label: '每季任务', value: 'quanter'},
+  {label: '每季任务', value: 'quarter'},
   {label: '每年任务', value: 'yearly'}
 ];
 

@@ -185,7 +185,7 @@ export default {
             color: #3e373a;
           }
           &.is-active{
-            background-color: #cacfd8;
+            background-color: darken(#d1dbe5, 5%);
           }
         }
       }

@@ -43,6 +43,12 @@
   export default {
     name: 'TaskTable',
     mixins: [tableMixin],
+    props: {
+      order: {
+        type: String,
+        default: 'frequency desc, recieverName asc'
+      }
+    },
     filters: {
       statusText(key) {
         return statusMap[key];

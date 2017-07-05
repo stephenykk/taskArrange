@@ -92,9 +92,15 @@ class MY_Controller extends CI_Controller {
 			$limits = array($offset, $size); 
 		}
 
+		$order = '';
+		$orderData = pluck($this->input->get(), array('order'));
+		if (!empty($orderData)) {
+			$order = $orderData['order'];
+		}
+
 		$method = $queryFromView ? 'viewGet' : 'get';
 
-		$res = $this->mymodel->$method($condition, $fields, $limits);
+		$res = $this->mymodel->$method($condition, $fields, $limits, $order);
 		output($res);
 	}
 

@@ -12,6 +12,10 @@ export default {
       type: String,
       default: 'id'
     }, 
+    order: { // 排序字段 eg: frequency asc, uid asc
+      type: String,
+      default: ''
+    },
     subject: String, // 主题
     queryView: Boolean, // 查询视图
     queryCondition: Object // 查询条件
@@ -44,6 +48,9 @@ export default {
     },
     load(notips) {
       const params = this.params;
+      if (this.order) {
+        Object.assign(params, {order: this.order});
+      }
       const data = this.queryView ? { view: true } : {};
       const cond = this.queryCondition;
       (typeof cond === 'object') && Object.assign(data, cond);

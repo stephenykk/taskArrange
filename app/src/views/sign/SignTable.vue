@@ -4,8 +4,10 @@
       <el-table-column type="index" label="序号" width="70"></el-table-column>
       <el-table-column prop="userName" label="用户名"></el-table-column>
       <el-table-column prop="depName" label="部门"></el-table-column>
-      <el-table-column prop="signIn" label="上班时间"></el-table-column>
-      <el-table-column prop="signOut" label="下班时间"></el-table-column>
+      <el-table-column prop="signIn" label="上午上班时间"></el-table-column>
+      <el-table-column prop="signOut" label="上午下班时间"></el-table-column>
+      <el-table-column prop="signIn2" label="下午上班时间"></el-table-column>
+      <el-table-column prop="signOut2" label="下午下班时间"></el-table-column>
       <el-table-column prop="meno" label="备注"></el-table-column>
       <el-table-column label="操作" width="120">
         <template scope="scope">

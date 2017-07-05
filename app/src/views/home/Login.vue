@@ -7,7 +7,7 @@
           <el-tab-pane label="登录" name="loginPane">
             <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="100px" label-position="left">
               <el-form-item label="用户名:" prop="name">
-                <el-input v-model="loginForm.name" :maxlength="20" :minlength="3" placeholder="字母或数字组成"></el-input>
+                <el-input v-model="loginForm.name" :maxlength="20" :minlength="3" placeholder="字母或数字组成" ref="input"></el-input>
               </el-form-item>
               <el-form-item label="密码:" prop="pwd">
                 <el-input type="password" v-model="loginForm.pwd" :minlength="3" :maxlength="20" placeholder="大于3位字母或数字"></el-input>
@@ -152,6 +152,12 @@
         this.$refs[refForm].resetFields();
       },
       ...mapMutations(['setUser'])
+    },
+    mounted() {
+      const that = this;
+      setTimeout(() => {
+        that.$refs.input.$el.querySelector('input[type=text]').focus();
+      }, 500);
     }
   };
 </script>

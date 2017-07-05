@@ -168,10 +168,10 @@ class MY_Model extends CI_Model{
 		return $res;
 	}
 
-	public function viewGet($condition='', $fields=array(), $limits=array())
+	public function viewGet($condition='', $fields=array(), $limits=array(), $order='')
 	{
 		$this->queryFromView = true;
-		$res = $this->get($condition, $fields, $limits);
+		$res = $this->get($condition, $fields, $limits, $order);
 		$this->queryFromView = false;
 		return $res;
 	}
