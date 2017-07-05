@@ -11,6 +11,11 @@ class Home extends CI_Controller {
     }
 
 	public function index() {
+
+        $url = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}schedule";
+        // echo $url;
+        sockopen($url);
+
         // readfile('app/index.html');
 		readfile('app/dist/index.html');
 	}
