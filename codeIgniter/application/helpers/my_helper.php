@@ -102,10 +102,10 @@ function sockopen($url) {
 function checkExpectTime()
 {
     $clockZero = new DateTime();
-    $clockZero->setTime(0, 0, 0);
+    $clockZero->setTime(12, 20, 0);
     $clockOne = new DateTime();
     // $clockOne->setTime(23, 55, 0);
-    $clockOne->setTime(1, 20, 0);
+    $clockOne->setTime(13, 25, 0);
 
     $now = new DateTime();
     return $now->getTimestamp() >= $clockZero->getTimestamp() && $now->getTimestamp() < $clockOne->getTimestamp();

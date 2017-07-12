@@ -15,6 +15,10 @@ class Schedule extends MY_Controller {
         parent::__construct();
     }
 
+    public function log($msg = '', $type = 'info') {
+        @file_put_contents('./logs.txt', "[$type]: $msg \r\n", FILE_APPEND);
+    }
+
     // 这个方法类似守护进程，是通过死循环和sleep,定时在跑的,
     // 可以在内部用静态变量，保持状态数据??
     // 应该也不行 两次 fsockopen($url)建立的链接，相互之间应该是数据独立的?
@@ -43,26 +47,38 @@ class Schedule extends MY_Controller {
                 break;
             }
 
-            @file_put_contents('./logs.txt', '[schedule]: ' .date('Y-m-d H:i:s') . "\r\n", FILE_APPEND);
+            $this->log(date('Y-m-d H:i:s'), 'log');
 
             if (checkExpectTime()) {
                 $done = $this->checkHasInserted();
+                $this->log('in expect time, has inserted? ' . ($done ? 'YES' : 'NO'));
+
                 // $done = false; // only test
                 $dCount = $wCount = $mCount = $qCount = $yCount = 0;
                 if (dayBegins() && !$done) {
+                    $this->log('day begins, and before insert daily tasks');
                     $dCount = $this->insertRecords('daily');
+                    $this->log('day begins, and after insert daily tasks');
                 }
                 if (weekBegins() && !$done) {
+                    $this->log('week begins, and before insert weekly tasks');
                     $wCount = $this->insertRecords('weekly');
+                    $this->log('week begins, and before insert weekly tasks');
                 }
                 if (monthBegins() && !$done) {
+                    $this->log('month begins, and before insert monthly tasks');
                     $mCount = $this->insertRecords('monthly');
+                    $this->log('month begins, and before insert monthly tasks');
                 }
                 if (seasonBegins() && !$done) {
+                    $this->log('season begins, and before insert quarter tasks');
                     $qCount = $this->insertRecords('quarter');
+                    $this->log('season begins, and before insert quarter tasks');
                 }
                 if (yearBegins() && !$done) {
+                    $this->log('year begins, and before insert yearly tasks');
                     $yCount = $this->insertRecords('yearly');
+                    $this->log('year begins, and before insert yearly tasks');
                 }
 
                 $res = appendData(success('自动新增完成'), array('daily' => $dCount, 'weekly' => $wCount, 'monthly' => $mCount, 'quarter' => $qCount, 'yearly' => $yCount));
