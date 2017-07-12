@@ -15,8 +15,8 @@ class Schedule extends MY_Controller {
         parent::__construct();
     }
 
-    public function log($msg = '', $type = 'info') {
-        @file_put_contents('./logs.txt', "[$type]: $msg \r\n", FILE_APPEND);
+    public function log($msg = '', $type = 'info', $lf=false) {
+        @file_put_contents('./logs.txt', ($lf ? "\r\n\r\n" : "") .  "[$type]: $msg \r\n", FILE_APPEND);
     }
 
     // 这个方法类似守护进程，是通过死循环和sleep,定时在跑的,
@@ -47,7 +47,7 @@ class Schedule extends MY_Controller {
                 break;
             }
 
-            $this->log(date('Y-m-d H:i:s'), 'log');
+            $this->log(date('Y-m-d H:i:s'), 'log', true);
 
             if (checkExpectTime()) {
                 $done = $this->checkHasInserted();
