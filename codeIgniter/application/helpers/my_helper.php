@@ -113,7 +113,10 @@ function checkExpectTime()
 
 function dayBegins()
 {
-    return true;  // 0:00 - 1:00
+    // 非星期六 星期天 0:00 - 1:20
+    $now = new DateTime();
+    $w = $now->format('w');
+    return !in_array(intval($w), array(0, 6));
 }
 
 function weekBegins() {
