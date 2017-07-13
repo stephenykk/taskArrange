@@ -30,7 +30,7 @@ class Schedule extends MY_Controller {
         set_time_limit(0);
 
         $interval = 3600; // 1 hour
-        // $interval = 10; // test
+        // $interval = 1800; // test
 
          // $res = $this->mymodel->get();
         // print_r($res);
