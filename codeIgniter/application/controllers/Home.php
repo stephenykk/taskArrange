@@ -11,16 +11,44 @@ class Home extends CI_Controller {
     }
 
 	public function index() {
-
-        $url = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}schedule";
-        echo $url;
-        // sockopen($url);
-        $con = file_get_contents($url);
-            echo $con;
-            die('--------->>>');
-        // readfile('app/index.html');
 		readfile('app/dist/index.html');
 	}
+
+	// 第一次启用定时任务，调用这个方法 /home/timingtask
+    public function timingtask() {
+
+        $url = "http://{$_SERVER['HTTP_HOST']}/schedule";
+        // echo $url . "\r\n";
+
+        $html = '';
+        $date = date('Y-m-d H:i:s');
+        if(file_exists('./running.txt')) {
+            $html .=  "<h4 style='color:red'>[${date}] 定时任务已在运行中... 请勿重复访问当前url</h4>";
+        } else {
+            // $con = file_get_contents($url);
+            // echo $con;
+
+            sockopen($url);
+            $html .= "<h4 style='color: green'>[${date}] 定时任务启动成功</h4>";
+            $html .= "<p>系统会在凌晨0:00 - 1:20 期间自动添加固定周期的任务(每天，每周，每月....)</p>";
+        }
+
+        $html .= "<p style='background:#eee; color: darkblue; border-radius: 3px; padding: 10px;'> <em>[注意]: </em> <br/> 若重启服务器或重启apache, <br/> <strong>必须</strong>访问网址 http://{$_SERVER['HTTP_HOST']}/home/restarttiming 以重新启用定时任务!!!</p>";
+        echo $html;
+	}
+
+    // 重启服务器或重启apache后 执行这个方法，启用定时 /home/restarttiming
+    public function restarttiming($value='')
+    {
+        $done = @unlink('./running.txt');
+        @unlink('./stoped.txt');
+        if($done) {
+            $this->timingtask();
+        } else {
+            die('fail to delete running.txt!');
+        }
+    }
+
 
     public function time()
     {

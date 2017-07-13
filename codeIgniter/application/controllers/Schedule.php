@@ -1,45 +1,54 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Schedule extends MY_Controller {
     public $model = 'TaskModel';
+    // 每次请求过来 Schedule类都是重新声明的，无法用静态变量持久化状态
+    // 全局变量也不行，每次请求过来，似乎所有php代码都是重新开始执行的
+    // 把状态数据存到文件里，可以持久化；但是web服务器重启后无法重置状态为初始值
+    /*public static $running = false;
+    public static $stoped = false;*/
 
     public function __construct() 
     {
         parent::__construct();
     }
 
+    // 这个方法类似守护进程，是通过死循环和sleep,定时在跑的,
+    // 可以在内部用静态变量，保持状态数据??
+    // 应该也不行 两次 fsockopen($url)建立的链接，相互之间应该是数据独立的?
 
+    // :: 通过特殊的url(/home/timingtask)启动定时任务，重启服务器后也要手动调用一次
     public function index() 
     {
         ignore_user_abort();
         set_time_limit(0);
 
-        $interval = 10; // 1 hour
+        $interval = 3600; // 1 hour
+        // $interval = 10; // test
 
-        /*$query = $this->db->query('select * from users');
-        $data = $query->result();
-        print_r($data);*/
-
-        $res = $this->mymodel->get();
-        print_r($res);
-        die('----------->');
+         // $res = $this->mymodel->get();
+        // print_r($res);
 
         if (file_exists('./running.txt')) { // 定时任务已经在运行
             exit('already running');
         }
 
         @file_put_contents('./running.txt', '');
-        date_default_timezone_set('asia/shanghai');
 
+        date_default_timezone_set('asia/shanghai');
         do {
             if (file_exists('./stoped.txt')) {
                 break;
             }
 
+            @file_put_contents('./logs.txt', '[schedule]: ' .date('Y-m-d H:i:s') . "\r\n", FILE_APPEND);
+
             if (checkExpectTime()) {
-                @file_put_contents('./running.txt', date('Y-m-d H:i:s') . "\r\n", FILE_APPEND);
                 $done = $this->checkHasInserted();
+                // $done = false; // only test
+                $dCount = $wCount = $mCount = $qCount = $yCount = 0;
                 if (dayBegins() && !$done) {
                     $dCount = $this->insertRecords('daily');
                 }
@@ -65,35 +74,36 @@ class Schedule extends MY_Controller {
 
     }
 
-    public fuction checkHasInserted()
+    public function checkHasInserted()
     {
         $today = date('Y-m-d');
-        $cond = "Date(ctime) == '${today}' and copy_from is not null";
-        $this->db->where($cond);
-        $query = $this->db->select('tasks');
-        return $query->number_rows() > 0;
+        $cond = "Date(ctime) = '${today}' and copy_from is not null";
+        $query = $this->db->where($cond)->get('tasks');
+        return $query->num_rows() > 0;
     }
 
     public function queryTasksByType($type)
     {
-        $con = "frequency='${type}' and copy_from is null";
-        $query = $this->db->where($con);
-        return $query->result();
+        $cond = "frequency='${type}' and copy_from is null";
+        $query = $this->db->where($cond)->get('tasks');
+        // return $query->result();
+        return $query->result_array();
     }
 
     public function getNewTasks($data)
     {
         $now = date('Y-m-d H:i:s');
-        foreach ($data as $row) {
-            $row->copy_from = $row->id;
-            $row->ctime = $now;
-            $row->mtime = $now;
-            $row->assign_time = $now;
-            $row->recieve_time = $now;
-            $row->task_start = null;
-            $row->task_end = null;
-            $row->status = 'recieved';
-            $row->reason = '';
+        foreach ($data as &$row) {
+            $row['copy_from'] = $row['id'];
+            $row['ctime'] = $now;
+            $row['mtime'] = $now;
+            $row['assign_time'] = $now;
+            $row['recieve_time'] = $now;
+            $row['task_start'] = null;
+            $row['task_end'] = null;
+            $row['status'] = 'recieved';
+            $row['reason'] = '';
+            unset($row['id']);
         }
         return $data;
     }
@@ -105,9 +115,9 @@ class Schedule extends MY_Controller {
         if (empty($newTasks)) {
             return 0;
         }
-
         $result = $this->db->insert_batch('tasks', $newTasks);
         $count = $this->db->affected_rows();
+
         return $count;
         
         // $res = appendData(success('自动添加成功'), array('count' => $count));

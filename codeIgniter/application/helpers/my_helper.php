@@ -104,38 +104,39 @@ function checkExpectTime()
     $clockZero = new DateTime();
     $clockZero->setTime(0, 0, 0);
     $clockOne = new DateTime();
-    $clockOne->setTime(17, 0, 0);
+    // $clockOne->setTime(23, 55, 0);
+    $clockOne->setTime(1, 20, 0);
 
     $now = new DateTime();
     return $now->getTimestamp() >= $clockZero->getTimestamp() && $now->getTimestamp() < $clockOne->getTimestamp();
 }
 
-function isBeginningOfDay()
+function dayBegins()
 {
     return true;  // 0:00 - 1:00
 }
 
-function isBeginningOfWeek() {
+function weekBegins() {
     $now = new DateTime();
     $w = $now->format('w');
     return intval($w) === 1; // monday
 }
 
-function isBeginningOfMonth()
+function monthBegins()
 {
     $now = new DateTime();
     $d = $now->format('j');
     return intval($d) === 1; // first day of month
 }
 
-function isBeginningOfSeason()
+function seasonBegins()
 {
     $now = new DateTime();
     $m = $now->format('n');
-    return isBeginningOfMonth() && in_array(intval($m), array(1,4,7,10)); // first day of season
+    return monthBegins() && in_array(intval($m), array(1,4,7,10)); // first day of season
 }
 
-function isBeginningOfYear()
+function yearBegins()
 {
     $now = new DateTime();
     $d = $now->format('j');
