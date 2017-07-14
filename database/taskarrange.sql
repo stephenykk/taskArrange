@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : myown
+Source Server         : MYDB
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : taskarrange
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-06-03 17:55:26
+Date: 2017-07-14 15:39:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,13 +41,12 @@ CREATE TABLE `applies` (
   `result` char(20) DEFAULT NULL COMMENT '维修结果',
   `reason` tinytext COMMENT '维修备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of applies
 -- ----------------------------
-INSERT INTO `applies` VALUES ('2', '打印机有点奇怪的响声', '次哦么and ahs  dofodfo', '2017-05-28 17:02:20', '2017-05-31 22:26:44', 'assigned', '10', 'print', '27', '27', '27', '2017-05-31 22:26:44', null, null, null, null, '行政楼402', '3230044', null, null);
-INSERT INTO `applies` VALUES ('4', 'sodoodo oeowoe ddf 3', 'sewoeo ', '2017-05-28 17:03:25', '2017-06-02 04:58:56', 'assigned', '10', 'print', '27', '27', '27', '2017-06-02 04:58:56', '2017-05-30 04:50:59', '2017-05-30 04:56:10', '2017-05-30 04:56:14', null, '行政楼402', '3230044', 'unfixed', '定位不到具体原因，请大神帮忙..');
+INSERT INTO `applies` VALUES ('5', '奖金系统', '有问题', '2017-06-08 16:41:38', '2017-06-08 21:37:49', 'assigned', '16', 'other', '33', '28', '27', '2017-06-08 21:37:49', null, null, null, null, '住院部3楼', '2232', null, null);
 
 -- ----------------------------
 -- Table structure for `deps`
@@ -60,21 +59,15 @@ CREATE TABLE `deps` (
   `tel` char(15) DEFAULT NULL,
   `manager` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of deps
 -- ----------------------------
-INSERT INTO `deps` VALUES ('1', '信息科热rbbn', '行政楼203', '3822829', '20');
-INSERT INTO `deps` VALUES ('2', '小儿科2', '门诊楼203', '324342', '17');
-INSERT INTO `deps` VALUES ('3', '内科', '门诊楼242', '222342', '17');
-INSERT INTO `deps` VALUES ('4', '内科2', '门诊楼243', '44432', '17');
-INSERT INTO `deps` VALUES ('5', '外科', '门诊楼443', '2311233', '17');
-INSERT INTO `deps` VALUES ('6', '外科2', '门诊楼443', '2311233', '17');
-INSERT INTO `deps` VALUES ('10', '小儿保健科', '行政楼402', '3230044', '20');
-INSERT INTO `deps` VALUES ('11', '小儿保健科2-cc', '行政楼402-3', '020-908763', '6');
-INSERT INTO `deps` VALUES ('13', '生活科', '23ff', '0755-6996985', '7');
-INSERT INTO `deps` VALUES ('14', '信息科', '信息楼202', '020-55254', '28');
+INSERT INTO `deps` VALUES ('15', '远程会诊中心', '门诊部5楼', '13823682603', '28');
+INSERT INTO `deps` VALUES ('16', '内一科', '住院部3楼', null, null);
+INSERT INTO `deps` VALUES ('17', '内二科', '住院部2楼', null, null);
+INSERT INTO `deps` VALUES ('18', '外一科', '住院部6楼', null, null);
 
 -- ----------------------------
 -- Table structure for `duties`
@@ -84,20 +77,34 @@ CREATE TABLE `duties` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `sign_in` timestamp NULL DEFAULT NULL,
+  `sign_in2` timestamp NULL DEFAULT NULL,
   `sign_out` timestamp NULL DEFAULT NULL,
+  `sign_out2` timestamp NULL DEFAULT NULL,
   `meno` tinytext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of duties
 -- ----------------------------
-INSERT INTO `duties` VALUES ('9', '27', '2017-05-31 04:50:49', '2017-05-31 22:37:45', null);
-INSERT INTO `duties` VALUES ('10', '9', '2017-05-31 05:15:02', '2017-05-31 05:17:40', null);
-INSERT INTO `duties` VALUES ('11', '20', '2017-05-31 05:22:25', '2017-05-31 05:22:47', null);
-INSERT INTO `duties` VALUES ('12', '20', '2017-06-02 06:41:18', '2017-06-02 06:41:22', null);
-INSERT INTO `duties` VALUES ('13', '20', '2017-06-03 13:30:55', null, null);
-INSERT INTO `duties` VALUES ('14', '26', '2017-06-03 17:42:32', '2017-06-03 17:42:36', null);
+INSERT INTO `duties` VALUES ('9', '27', '2017-05-31 04:50:49', null, '2017-05-31 22:37:45', null, null);
+INSERT INTO `duties` VALUES ('10', '20', '2017-07-05 05:52:41', null, '2017-07-05 05:52:47', null, null);
+INSERT INTO `duties` VALUES ('11', '23', '2017-07-05 08:10:59', null, '2017-07-05 10:48:35', null, null);
+INSERT INTO `duties` VALUES ('12', '32', '2017-07-05 11:04:35', '2017-07-05 14:39:53', '2017-07-05 11:31:12', null, null);
+INSERT INTO `duties` VALUES ('13', '32', '2017-07-06 11:26:36', '2017-07-06 14:28:25', '2017-07-06 11:34:12', '2017-07-06 17:30:39', null);
+INSERT INTO `duties` VALUES ('14', '23', null, '2017-07-06 14:31:02', null, '2017-07-06 17:31:15', null);
+INSERT INTO `duties` VALUES ('15', '23', '2017-07-07 07:59:36', '2017-07-07 14:30:22', '2017-07-07 11:30:28', '2017-07-07 17:33:57', null);
+INSERT INTO `duties` VALUES ('16', '32', '2017-07-07 08:10:05', '2017-07-07 14:37:27', '2017-07-07 11:30:45', '2017-07-07 17:30:52', null);
+INSERT INTO `duties` VALUES ('17', '23', '2017-07-10 07:57:45', '2017-07-10 14:29:11', '2017-07-10 11:31:15', '2017-07-10 17:31:41', null);
+INSERT INTO `duties` VALUES ('18', '32', '2017-07-10 08:07:50', '2017-07-10 14:21:50', '2017-07-10 11:32:23', '2017-07-10 17:31:19', null);
+INSERT INTO `duties` VALUES ('19', '23', '2017-07-11 08:00:28', '2017-07-11 14:29:24', '2017-07-11 11:33:09', '2017-07-11 17:33:22', null);
+INSERT INTO `duties` VALUES ('20', '32', '2017-07-11 08:07:29', '2017-07-11 17:30:07', '2017-07-11 11:30:44', null, null);
+INSERT INTO `duties` VALUES ('21', '23', '2017-07-12 07:57:16', '2017-07-12 14:27:40', '2017-07-12 11:37:53', '2017-07-12 17:30:10', null);
+INSERT INTO `duties` VALUES ('22', '32', '2017-07-12 08:02:23', '2017-07-12 14:28:13', null, '2017-07-12 17:30:41', null);
+INSERT INTO `duties` VALUES ('23', '23', '2017-07-13 07:56:27', '2017-07-13 14:26:34', '2017-07-13 11:30:08', '2017-07-13 17:38:44', null);
+INSERT INTO `duties` VALUES ('24', '32', '2017-07-13 08:05:41', '2017-07-13 14:38:02', '2017-07-13 11:30:23', '2017-07-13 17:31:17', null);
+INSERT INTO `duties` VALUES ('25', '23', '2017-07-14 07:59:09', null, null, null, null);
+INSERT INTO `duties` VALUES ('26', '32', '2017-07-14 08:05:27', '2017-07-14 14:20:06', null, null, null);
 
 -- ----------------------------
 -- Table structure for `roles`
@@ -154,17 +161,64 @@ CREATE TABLE `tasks` (
   `recieve_time` timestamp NULL DEFAULT NULL COMMENT '任务接收时间',
   `task_start` timestamp NULL DEFAULT NULL COMMENT '任务开始时间',
   `task_end` timestamp NULL DEFAULT NULL COMMENT '任务结束时间',
+  `copy_from` int(11) DEFAULT NULL,
+  `xxfsbz` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of tasks
 -- ----------------------------
-INSERT INTO `tasks` VALUES ('2', 'ertr', 'trtr', '27', '27', '27', '2017-05-17 01:10:09', '2017-05-28 10:17:03', 'finish', 'helo world3', 'daily', '2017-05-17 01:09:50', '2017-05-27 01:10:01', '2017-05-17 01:10:08', '2017-05-28 04:55:22', '2017-05-28 04:55:29', '2017-05-28 04:55:32');
-INSERT INTO `tasks` VALUES ('3', '新任务001', 'keep health , to be youself, think deep', '27', '22', '27', '2017-05-18 00:57:10', '2017-05-18 00:57:10', 'assigned', null, 'daily', '2017-05-18 00:56:43', '2017-05-19 00:56:52', '2017-05-18 00:57:10', null, null, null);
-INSERT INTO `tasks` VALUES ('4', '哈奥', 'so many thing to carry out...', '27', '26', '27', '2017-05-18 00:57:54', '2017-05-18 00:57:54', 'assigned', null, 'once', '2017-05-19 00:56:43', '2017-05-30 00:56:52', '2017-05-18 00:57:54', null, null, null);
-INSERT INTO `tasks` VALUES ('5', '我们的周末3', '好偶尔偶然', '27', '27', '27', '2017-05-18 00:58:58', '2017-06-02 22:55:52', 'finish', null, 'monthly', '2017-05-18 00:58:52', '2017-05-31 00:58:56', '2017-05-25 00:12:10', null, null, '2017-06-02 22:55:52');
-INSERT INTO `tasks` VALUES ('9', 'dfdf-socool-2', 'sdd', '27', '22', '9', '2017-05-28 11:45:33', '2017-05-28 11:45:33', 'assigned', null, 'daily', '2017-05-28 11:45:12', '2017-05-30 11:45:15', '2017-05-28 12:23:10', null, null, null);
+INSERT INTO `tasks` VALUES ('12', '更新科室U盘远程医疗视频讲座', '更新科室U盘远程医疗视频讲座', '28', '23', '28', '2017-06-09 08:50:12', '2017-06-09 08:50:12', 'assigned', null, 'weekly', '2017-06-09 08:50:08', '2017-12-31 08:50:10', '2017-06-09 08:50:12', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('13', '局域网发通知：远程教学视频讲座安排表', '局域网发通知：远程教学视频讲座安排表', '28', '23', '28', '2017-06-09 09:11:32', '2017-06-09 09:11:32', 'assigned', null, 'weekly', '2017-06-09 09:11:21', '2017-12-31 09:11:23', '2017-06-09 09:11:32', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('14', '远程会诊中心卫生', '保证中心卫生干净，物品摆放整齐。', '28', '23', '28', '2017-06-09 09:23:46', '2017-06-09 09:23:46', 'assigned', null, 'daily', '2017-06-09 09:23:42', '2017-12-31 09:23:45', '2017-06-09 09:23:46', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('15', '叫号系统巡查', '检查医院三个门诊医疗区分诊叫号系统运行情况', '28', '23', '28', '2017-06-09 09:26:40', '2017-07-04 08:47:15', 'finish', '已完成', 'daily', '2017-06-09 09:26:36', '2017-12-31 09:26:39', '2017-06-09 09:26:40', '2017-07-04 08:47:05', '2017-07-04 08:47:07', '2017-07-04 08:47:08', null, null);
+INSERT INTO `tasks` VALUES ('16', '瓶签、清单打印系统、供应室消毒巡查', '瓶签、清单打印系统、供应室消毒巡查', '28', '23', '28', '2017-06-09 09:41:09', '2017-06-09 09:41:09', 'assigned', null, 'weekly', '2017-06-09 09:41:06', '2017-12-31 09:41:08', '2017-06-09 09:41:09', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('17', '检查医疗干部休假系统短信发送端运行情况', '检查医疗干部休假系统短信发送端运行情况', '28', '32', '28', '2017-06-09 10:04:44', '2017-06-09 10:04:44', 'assigned', null, 'daily', '2017-06-09 10:04:41', '2017-12-31 10:04:43', '2017-06-09 10:04:44', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('18', '提取医疗干部休假系统干部休假情况', '如果有干部休假同意的，打印批复表，盖章，并发至相应的科室', '28', '32', '28', '2017-06-09 10:07:01', '2017-06-09 10:07:01', 'assigned', null, 'daily', '2017-06-09 10:06:58', '2017-12-31 10:07:01', '2017-06-09 10:07:01', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('19', '病人随访', '须做至少2个病人回访', '28', '32', '28', '2017-06-12 15:22:24', '2017-06-12 15:22:24', 'assigned', null, 'daily', '2017-06-12 15:23:15', '2017-12-31 15:23:23', '2017-06-12 15:23:24', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('20', '更新医院外网信息', '更新医院外网信息', '28', '32', '28', '2017-06-12 15:33:34', '2017-06-12 15:33:34', 'assigned', null, 'daily', '2017-06-12 15:34:27', '2017-12-31 15:34:33', '2017-06-12 15:34:34', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('21', '更新公安网健康服务平台信息', '更新公安网健康服务平台信息', '28', '32', '28', '2017-06-12 15:34:11', '2017-06-12 15:34:11', 'assigned', null, 'daily', '2017-06-12 15:34:34', '2017-12-31 15:35:10', '2017-06-12 15:35:11', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('22', '制作医师资格证、执业证', '制作医师资格证、执业证', '28', '32', '20', '2017-06-12 15:35:15', '2017-06-12 15:35:15', 'assigned', null, 'weekly', '2017-06-12 15:36:08', '2017-12-31 15:36:13', '2017-06-12 15:36:14', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('23', '医务部考勤上报', '医务部考勤上报', '28', '32', '28', '2017-06-12 15:35:40', '2017-06-12 15:35:40', 'assigned', null, 'monthly', '2017-06-12 15:36:15', '2017-12-31 15:36:39', '2017-06-12 15:36:39', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('24', '奖金发放', '奖金发放', '28', '23', '28', '2017-06-12 15:36:46', '2017-06-12 15:36:46', 'assigned', null, 'monthly', '2017-06-12 15:36:39', '2017-12-31 15:37:45', '2017-06-12 15:37:46', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('25', '医务部周报统计', '医务部周报统计', '28', '32', '28', '2017-06-12 15:46:21', '2017-06-12 16:04:05', 'finish', '因。。。问题处理。。', 'weekly', '2017-06-12 15:47:13', '2017-12-31 15:47:20', '2017-06-12 15:47:21', '2017-06-12 16:03:05', '2017-06-12 16:04:39', '2017-06-12 16:04:45', null, null);
+INSERT INTO `tasks` VALUES ('26', '工作证制作', '工作证制作\n', '28', '23', '28', '2017-06-12 15:48:18', '2017-06-12 15:48:18', 'assigned', null, 'weekly', '2017-06-12 15:47:21', '2017-12-31 15:49:11', '2017-06-12 15:49:18', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('28', '每天下午在线直播远程医疗视频教学', '开放远程会诊中心，刻录视频', '20', '23', '20', '2017-07-04 08:40:28', '2017-07-04 08:40:28', 'assigned', null, 'daily', '2017-07-04 08:40:24', '2017-12-31 08:40:27', '2017-07-04 08:40:28', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('29', 'test 新建季度任务', 'wer', '20', '28', '20', '2017-07-05 03:54:34', '2017-07-05 03:54:34', 'assigned', null, 'quarter', '2017-07-05 03:54:22', '2017-07-18 03:54:28', '2017-07-05 03:54:34', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('30', 'test 季度任务', 'wewewe', '20', '27', '20', '2017-07-05 05:52:08', '2017-07-05 05:52:08', 'assigned', null, 'quarter', '2017-07-05 05:51:55', '2017-07-18 05:52:01', '2017-07-05 05:52:08', null, null, null, null, null);
+INSERT INTO `tasks` VALUES ('54', '远程会诊中心卫生', '保证中心卫生干净，物品摆放整齐。', '28', '23', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-09 09:23:42', '2017-12-31 09:23:45', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '14', null);
+INSERT INTO `tasks` VALUES ('55', '叫号系统巡查', '检查医院三个门诊医疗区分诊叫号系统运行情况', '28', '23', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-09 09:26:36', '2017-12-31 09:26:39', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '15', null);
+INSERT INTO `tasks` VALUES ('56', '检查医疗干部休假系统短信发送端运行情况', '检查医疗干部休假系统短信发送端运行情况', '28', '32', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-09 10:04:41', '2017-12-31 10:04:43', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '17', null);
+INSERT INTO `tasks` VALUES ('57', '提取医疗干部休假系统干部休假情况', '如果有干部休假同意的，打印批复表，盖章，并发至相应的科室', '28', '32', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-09 10:06:58', '2017-12-31 10:07:01', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '18', null);
+INSERT INTO `tasks` VALUES ('58', '病人随访', '须做至少2个病人回访', '28', '32', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-12 15:23:15', '2017-12-31 15:23:23', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '19', null);
+INSERT INTO `tasks` VALUES ('59', '更新医院外网信息', '更新医院外网信息', '28', '32', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-12 15:34:27', '2017-12-31 15:34:33', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '20', null);
+INSERT INTO `tasks` VALUES ('60', '更新公安网健康服务平台信息', '更新公安网健康服务平台信息', '28', '32', '28', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-06-12 15:34:34', '2017-12-31 15:35:10', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '21', null);
+INSERT INTO `tasks` VALUES ('61', '每天下午在线直播远程医疗视频教学', '开放远程会诊中心，刻录视频', '20', '23', '20', '2017-07-11 00:30:49', '2017-07-11 00:30:49', 'recieved', '', 'daily', '2017-07-04 08:40:24', '2017-12-31 08:40:27', '2017-07-11 00:30:49', '2017-07-11 00:30:49', null, null, '28', null);
+INSERT INTO `tasks` VALUES ('62', '远程会诊中心卫生', '保证中心卫生干净，物品摆放整齐。', '28', '23', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-09 09:23:42', '2017-12-31 09:23:45', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '14', null);
+INSERT INTO `tasks` VALUES ('63', '叫号系统巡查', '检查医院三个门诊医疗区分诊叫号系统运行情况', '28', '23', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-09 09:26:36', '2017-12-31 09:26:39', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '15', null);
+INSERT INTO `tasks` VALUES ('64', '检查医疗干部休假系统短信发送端运行情况', '检查医疗干部休假系统短信发送端运行情况', '28', '32', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-09 10:04:41', '2017-12-31 10:04:43', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '17', null);
+INSERT INTO `tasks` VALUES ('65', '提取医疗干部休假系统干部休假情况', '如果有干部休假同意的，打印批复表，盖章，并发至相应的科室', '28', '32', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-09 10:06:58', '2017-12-31 10:07:01', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '18', null);
+INSERT INTO `tasks` VALUES ('66', '病人随访', '须做至少2个病人回访', '28', '32', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-12 15:23:15', '2017-12-31 15:23:23', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '19', null);
+INSERT INTO `tasks` VALUES ('67', '更新医院外网信息', '更新医院外网信息', '28', '32', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-12 15:34:27', '2017-12-31 15:34:33', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '20', null);
+INSERT INTO `tasks` VALUES ('68', '更新公安网健康服务平台信息', '更新公安网健康服务平台信息', '28', '32', '28', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-06-12 15:34:34', '2017-12-31 15:35:10', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '21', null);
+INSERT INTO `tasks` VALUES ('69', '每天下午在线直播远程医疗视频教学', '开放远程会诊中心，刻录视频', '20', '23', '20', '2017-07-12 12:46:49', '2017-07-12 12:46:49', 'recieved', '', 'daily', '2017-07-04 08:40:24', '2017-12-31 08:40:27', '2017-07-12 12:46:49', '2017-07-12 12:46:49', null, null, '28', null);
+INSERT INTO `tasks` VALUES ('102', '远程会诊中心卫生', '保证中心卫生干净，物品摆放整齐。', '28', '23', '28', '2017-07-13 16:14:36', '2017-07-13 16:14:36', 'recieved', '', 'daily', '2017-06-09 09:23:42', '2017-12-31 09:23:45', '2017-07-13 16:14:36', '2017-07-13 16:14:36', null, null, '14', null);
+INSERT INTO `tasks` VALUES ('103', '叫号系统巡查', '检查医院三个门诊医疗区分诊叫号系统运行情况', '28', '23', '28', '2017-07-13 16:14:36', '2017-07-13 17:47:39', 'doing', '', 'daily', '2017-06-09 09:26:36', '2017-12-31 09:26:39', '2017-07-13 16:14:36', '2017-07-13 16:14:36', '2017-07-13 17:47:39', null, '15', null);
+INSERT INTO `tasks` VALUES ('104', '检查医疗干部休假系统短信发送端运行情况', '检查医疗干部休假系统短信发送端运行情况', '28', '32', '28', '2017-07-13 16:14:36', '2017-07-13 16:14:36', 'recieved', '', 'daily', '2017-06-09 10:04:41', '2017-12-31 10:04:43', '2017-07-13 16:14:36', '2017-07-13 16:14:36', null, null, '17', null);
+INSERT INTO `tasks` VALUES ('105', '提取医疗干部休假系统干部休假情况', '如果有干部休假同意的，打印批复表，盖章，并发至相应的科室', '28', '32', '28', '2017-07-13 16:14:36', '2017-07-13 16:14:36', 'recieved', '', 'daily', '2017-06-09 10:06:58', '2017-12-31 10:07:01', '2017-07-13 16:14:36', '2017-07-13 16:14:36', null, null, '18', null);
+INSERT INTO `tasks` VALUES ('106', '病人随访', '须做至少2个病人回访', '28', '32', '28', '2017-07-13 16:14:36', '2017-07-13 16:14:36', 'recieved', '', 'daily', '2017-06-12 15:23:15', '2017-12-31 15:23:23', '2017-07-13 16:14:36', '2017-07-13 16:14:36', null, null, '19', null);
+INSERT INTO `tasks` VALUES ('107', '更新医院外网信息', '更新医院外网信息', '28', '32', '28', '2017-07-13 16:14:36', '2017-07-13 16:14:36', 'recieved', '', 'daily', '2017-06-12 15:34:27', '2017-12-31 15:34:33', '2017-07-13 16:14:36', '2017-07-13 16:14:36', null, null, '20', null);
+INSERT INTO `tasks` VALUES ('108', '更新公安网健康服务平台信息', '更新公安网健康服务平台信息', '28', '32', '28', '2017-07-13 16:14:36', '2017-07-13 16:14:36', 'recieved', '', 'daily', '2017-06-12 15:34:34', '2017-12-31 15:35:10', '2017-07-13 16:14:36', '2017-07-13 16:14:36', null, null, '21', null);
+INSERT INTO `tasks` VALUES ('109', '每天下午在线直播远程医疗视频教学', '开放远程会诊中心，刻录视频', '20', '23', '20', '2017-07-13 16:14:36', '2017-07-13 17:18:25', 'doing', '', 'daily', '2017-07-04 08:40:24', '2017-12-31 08:40:27', '2017-07-13 16:14:36', '2017-07-13 16:14:36', '2017-07-13 17:18:25', null, '28', null);
+INSERT INTO `tasks` VALUES ('110', '远程会诊中心卫生', '保证中心卫生干净，物品摆放整齐。', '28', '23', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-09 09:23:42', '2017-12-31 09:23:45', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '14', null);
+INSERT INTO `tasks` VALUES ('111', '叫号系统巡查', '检查医院三个门诊医疗区分诊叫号系统运行情况', '28', '23', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-09 09:26:36', '2017-12-31 09:26:39', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '15', null);
+INSERT INTO `tasks` VALUES ('112', '检查医疗干部休假系统短信发送端运行情况', '检查医疗干部休假系统短信发送端运行情况', '28', '32', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-09 10:04:41', '2017-12-31 10:04:43', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '17', null);
+INSERT INTO `tasks` VALUES ('113', '提取医疗干部休假系统干部休假情况', '如果有干部休假同意的，打印批复表，盖章，并发至相应的科室', '28', '32', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-09 10:06:58', '2017-12-31 10:07:01', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '18', null);
+INSERT INTO `tasks` VALUES ('114', '病人随访', '须做至少2个病人回访', '28', '32', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-12 15:23:15', '2017-12-31 15:23:23', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '19', null);
+INSERT INTO `tasks` VALUES ('115', '更新医院外网信息', '更新医院外网信息', '28', '32', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-12 15:34:27', '2017-12-31 15:34:33', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '20', null);
+INSERT INTO `tasks` VALUES ('116', '更新公安网健康服务平台信息', '更新公安网健康服务平台信息', '28', '32', '28', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-06-12 15:34:34', '2017-12-31 15:35:10', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '21', null);
+INSERT INTO `tasks` VALUES ('117', '每天下午在线直播远程医疗视频教学', '开放远程会诊中心，刻录视频', '20', '23', '20', '2017-07-14 00:14:37', '2017-07-14 00:14:37', 'recieved', '', 'daily', '2017-07-04 08:40:24', '2017-12-31 08:40:27', '2017-07-14 00:14:37', '2017-07-14 00:14:37', null, null, '28', null);
 
 -- ----------------------------
 -- Table structure for `users`
@@ -184,29 +238,29 @@ CREATE TABLE `users` (
   `dep_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('6', 'nurse4', 'sindy', '123', '/uploads/fa1.jpg', 'female', '020-0909494', null, '13809092039', '护士', '10', '11');
-INSERT INTO `users` VALUES ('7', 'asigner3', 'andy', '123', null, 'male', '0220-665554', null, '13546885585', 'iter', '14', '9');
-INSERT INTO `users` VALUES ('19', 'asigner2', 'john', '123', null, 'male', '252-696565', null, '135252525', 'it technonical', '14', '9');
 INSERT INTO `users` VALUES ('20', 'pan', 'xiaopan', '123', '/uploads/fa7.jpg', 'male', '052-989699', null, '13520215555', 'engineer', '14', '7');
-INSERT INTO `users` VALUES ('22', 'nurse1', 'kitty', '123', null, 'female', '020-965585', null, '1365221522', 'nurse', '10', '11');
-INSERT INTO `users` VALUES ('23', 'iter3', 'robin', '123', '', 'male', '029039302', '', '13652425257', 'doctor', '14', '10');
-INSERT INTO `users` VALUES ('24', 'iter2', 'winry', '123', '/uploads/fa5.jpg', 'female', '025-96965655', null, '159632552', 'technician', '14', '10');
-INSERT INTO `users` VALUES ('26', 'iter1', 'lucy-huang', '123', '/uploads/winry5.jpg', 'female', '020-9383894', null, '139092029303', 'doctor', '14', '10');
-INSERT INTO `users` VALUES ('27', 'asigner1', 'daizy', '123', '/uploads/winry31.jpg', 'female', '020-30394', null, '12033434', 'tech-00933', '14', '9');
-INSERT INTO `users` VALUES ('28', 'luo', 'luo-leader', '123', '/uploads/fa6.jpg', 'male', '020-333434', null, '136201315545', '信息科科长', '5', '8');
-INSERT INTO `users` VALUES ('29', 'nurse3', 'alice', '123', null, 'female', '020-59898989', null, '135869555', 'nurse', '4', '11');
-INSERT INTO `users` VALUES ('31', 'nurse2', 'nami', '123', null, 'female', '252-9865566', null, '1352201211', 'nurse', '5', '11');
+INSERT INTO `users` VALUES ('23', 'liuy', '柳阳', '123', '', 'female', '0755-82699123', '', '18682055251', '职员', '15', '10');
+INSERT INTO `users` VALUES ('27', 'binby', 'binby', '123', '/uploads/winry31.jpg', 'male', '0755-82699122', null, '13823682603', '工程师', '15', '9');
+INSERT INTO `users` VALUES ('28', 'luo', '罗燕斌', '123', '/uploads/fa6.jpg', 'male', '020-333434', null, '13823682603', '工程师', '15', '8');
+INSERT INTO `users` VALUES ('32', 'zhouxy', '周晓云', '123', null, 'female', null, null, '15632016950', '职员', '15', '10');
+INSERT INTO `users` VALUES ('33', 'hef', '何方', '123', null, 'female', null, null, null, null, '16', '11');
 
 -- ----------------------------
 -- View structure for `v_apply`
 -- ----------------------------
 DROP VIEW IF EXISTS `v_apply`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_apply` AS select `applies`.`id` AS `id`,`applies`.`title` AS `title`,`applies`.`content` AS `content`,`applies`.`ctime` AS `ctime`,`applies`.`mtime` AS `mtime`,`applies`.`status` AS `status`,`applies`.`dep_id` AS `dep_id`,`applies`.`type` AS `type`,`applies`.`creator` AS `creator`,`applies`.`assigner` AS `assigner`,`applies`.`reciever` AS `reciever`,`applies`.`assign_time` AS `assign_time`,`applies`.`recieve_time` AS `recieve_time`,`applies`.`job_start` AS `job_start`,`applies`.`job_end` AS `job_end`,`applies`.`job_desc` AS `job_desc`,`applies`.`addr` AS `addr`,`applies`.`tel` AS `tel`,`applies`.`result` AS `result`,`cusers`.`name` AS `creatorName`,`ausers`.`name` AS `assignerName`,`rusers`.`name` AS `recieverName` from (((`applies` left join `users` `cusers` on((`cusers`.`id` = `applies`.`creator`))) left join `users` `ausers` on((`applies`.`assigner` = `ausers`.`id`))) left join `users` `rusers` on((`applies`.`reciever` = `rusers`.`id`))) ;
+
+-- ----------------------------
+-- View structure for `v_duty`
+-- ----------------------------
+DROP VIEW IF EXISTS `v_duty`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_duty` AS select `duties`.`sign_in` AS `signIn`,`duties`.`sign_out` AS `signOut`,`duties`.`meno` AS `meno`,`duties`.`id` AS `id`,`v_user`.`userName` AS `userName`,`v_user`.`userId` AS `userId`,`v_user`.`depName` AS `depName`,`duties`.`sign_out2` AS `signOut2`,`duties`.`sign_in2` AS `signIn2` from (`duties` left join `v_user` on((`v_user`.`userId` = `duties`.`user_id`))) ;
 
 -- ----------------------------
 -- View structure for `v_task`
