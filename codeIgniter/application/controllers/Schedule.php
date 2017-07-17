@@ -47,47 +47,54 @@ class Schedule extends MY_Controller {
                 break;
             }
 
-            $this->log(date('Y-m-d H:i:s'), 'log', true);
+            $this->autotask(); // 为定时任务添加新记录
 
-            if (checkExpectTime()) {
-                $done = $this->checkHasInserted();
-                $this->log('in expect time, has inserted? ' . ($done ? 'YES' : 'NO'));
-
-                // $done = false; // only test
-                $dCount = $wCount = $mCount = $qCount = $yCount = 0;
-                if (dayBegins() && !$done) {
-                    $this->log('day begins, and before insert daily tasks');
-                    $dCount = $this->insertRecords('daily');
-                    $this->log('day begins, and after insert daily tasks');
-                }
-                if (weekBegins() && !$done) {
-                    $this->log('week begins, and before insert weekly tasks');
-                    $wCount = $this->insertRecords('weekly');
-                    $this->log('week begins, and before insert weekly tasks');
-                }
-                if (monthBegins() && !$done) {
-                    $this->log('month begins, and before insert monthly tasks');
-                    $mCount = $this->insertRecords('monthly');
-                    $this->log('month begins, and before insert monthly tasks');
-                }
-                if (seasonBegins() && !$done) {
-                    $this->log('season begins, and before insert quarter tasks');
-                    $qCount = $this->insertRecords('quarter');
-                    $this->log('season begins, and before insert quarter tasks');
-                }
-                if (yearBegins() && !$done) {
-                    $this->log('year begins, and before insert yearly tasks');
-                    $yCount = $this->insertRecords('yearly');
-                    $this->log('year begins, and before insert yearly tasks');
-                }
-
-                $res = appendData(success('自动新增完成'), array('daily' => $dCount, 'weekly' => $wCount, 'monthly' => $mCount, 'quarter' => $qCount, 'yearly' => $yCount));
-                output($res);
-                
-            }
             sleep($interval);
         } while (true);
 
+    }
+
+    public function autotask()
+    {
+        $this->log(date('Y-m-d H:i:s'), 'log', true);
+
+        if (checkExpectTime()) {
+            $done = $this->checkHasInserted();
+            $this->log('in expect time, has inserted? ' . ($done ? 'YES' : 'NO'));
+
+            // $done = false; // only test
+            $dCount = $wCount = $mCount = $qCount = $yCount = 0;
+            if (dayBegins() && !$done) {
+                $this->log('day begins, and before insert daily tasks');
+                $dCount = $this->insertRecords('daily');
+                $this->log('day begins, and after insert daily tasks');
+            }
+            if (weekBegins() && !$done) {
+                $this->log('week begins, and before insert weekly tasks');
+                $wCount = $this->insertRecords('weekly');
+                $this->log('week begins, and before insert weekly tasks');
+            }
+            if (monthBegins() && !$done) {
+                $this->log('month begins, and before insert monthly tasks');
+                $mCount = $this->insertRecords('monthly');
+                $this->log('month begins, and before insert monthly tasks');
+            }
+            if (seasonBegins() && !$done) {
+                $this->log('season begins, and before insert quarter tasks');
+                $qCount = $this->insertRecords('quarter');
+                $this->log('season begins, and before insert quarter tasks');
+            }
+            if (yearBegins() && !$done) {
+                $this->log('year begins, and before insert yearly tasks');
+                $yCount = $this->insertRecords('yearly');
+                $this->log('year begins, and before insert yearly tasks');
+            }
+
+            $res = appendData(success('自动新增完成'), array('daily' => $dCount, 'weekly' => $wCount, 'monthly' => $mCount, 'quarter' => $qCount, 'yearly' => $yCount));
+            $this->log(json_encode($res));
+            output($res);
+            
+        }
     }
 
     public function checkHasInserted()

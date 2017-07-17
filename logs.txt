@@ -1,0 +1,18 @@
+
+
+[log]: 2017-07-17 15:07:38 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: week begins, and before insert weekly tasks 
+
+
+[log]: 2017-07-17 15:09:21 
+[info]: in expect time, has inserted? YES 
+[info]: Array 
+
+
+[log]: 2017-07-17 15:10:00 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
