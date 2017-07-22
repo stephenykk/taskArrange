@@ -1,0 +1,2 @@
+webpackJsonp([5],{159:function(e,t,n){var r=n(11)(n(443),n(489),null,null);e.exports=r.exports},443:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"StatView"}},489:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},staticRenderFns:[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"stat-page"},[n("h1",[e._v("stat page")])])}]}}});
+//# sourceMappingURL=5.335f406178775b8062e7.js.map
