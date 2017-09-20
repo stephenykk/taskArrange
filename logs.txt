@@ -1,1 +1,123 @@
+<<<<<<< HEAD
 [schedule]: 2017-07-14 00:20:42
+=======
+[info]: dfdf 
+
+
+[log]: 2017-07-17 15:39:01 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":6,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 15:40:19 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":6,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 15:42:16 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 16:41:13 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 16:43:54 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":6,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 16:45:02 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: week begins, and before insert weekly tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":6,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 16:45:16 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-17 16:46:33 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-18 05:00:03 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-18 15:47:26 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-19 05:00:00 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-19 15:47:26 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-19 16:31:04 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-20 05:00:00 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-20 15:47:26 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-21 05:00:00 
+[info]: in expect time, has inserted? NO 
+[info]: day begins, and before insert daily tasks 
+[info]: day begins, and after insert daily tasks 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":8,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-21 15:47:26 
+[info]: in expect time, has inserted? YES 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+
+
+[log]: 2017-07-22 05:00:00 
+[info]: in expect time, has inserted? NO 
+[info]: {"ok":true,"msg":"\u81ea\u52a8\u65b0\u589e\u5b8c\u6210","data":{"daily":0,"weekly":0,"monthly":0,"quarter":0,"yearly":0}} 
+>>>>>>> b96b011f95c2511a881c26c98fe82ad07185e477

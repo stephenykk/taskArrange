@@ -101,14 +101,15 @@ function sockopen($url) {
 
 function checkExpectTime()
 {
-    $clockZero = new DateTime();
-    $clockZero->setTime(0, 0, 0);
-    $clockOne = new DateTime();
-    // $clockOne->setTime(23, 55, 0);
-    $clockOne->setTime(1, 20, 0);
+  return true; // 每次都查询是否已添加
 
-    $now = new DateTime();
-    return $now->getTimestamp() >= $clockZero->getTimestamp() && $now->getTimestamp() < $clockOne->getTimestamp();
+  $clockZero = new DateTime();
+  $clockZero->setTime(0, 0, 10);
+  $clockOne = new DateTime();
+  $clockOne->setTime(1, 0, 0);
+
+  $now = new DateTime();
+  return $now->getTimestamp() >= $clockZero->getTimestamp() && $now->getTimestamp() < $clockOne->getTimestamp();
 }
 
 function dayBegins()

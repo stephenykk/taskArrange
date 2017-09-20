@@ -3,6 +3,7 @@
     <el-table border stripe :data="data">
       <el-table-column type="index" label="序号" width="70"></el-table-column>
       <el-table-column prop="title" label="任务名称"></el-table-column>
+      <el-table-column prop="content"  label="任务内容" width="200px"></el-table-column>
       <el-table-column prop="frequency" label="任务类型">
         <template scope="scope">
           {{scope.row.frequency | taskTypeText}}

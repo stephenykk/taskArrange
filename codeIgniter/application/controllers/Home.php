@@ -30,10 +30,11 @@ class Home extends CI_Controller {
 
             sockopen($url);
             $html .= "<h4 style='color: green'>[${date}] 定时任务启动成功</h4>";
-            $html .= "<p>系统会在凌晨0:00 - 1:20 期间自动添加固定周期的任务(每天，每周，每月....)</p>";
+            // $html .= "<p>系统会在凌晨0:00 - 1:20 期间自动添加固定周期的任务(每天，每周，每月....)</p>";
+            $html .= "<p>系统会在12:20 - 13:20 期间自动添加固定周期的任务(每天，每周，每月....)</p>";
         }
 
-        $html .= "<p style='background:#eee; color: darkblue; border-radius: 3px; padding: 10px;'> <em>[注意]: </em> <br/> 若重启服务器或重启apache, <br/> <strong>必须</strong>访问网址 http://{$_SERVER['HTTP_HOST']}/home/restarttiming 以重新启用定时任务!!!</p>";
+        $html .= "<p style='background:#eee; color: darkblue; border-radius: 3px; padding: 10px;'> <em>[注意]: </em> <br/> 若重启服务器或重启apache, <br/> <strong>必须</strong>访问网址 http://{$_SERVER['HTTP_HOST']}/home/restarttiming 以重新启用定时任务!!!</p><p>每次重启apache /home/restarttiming只能执行一下</p>";
         echo $html;
 	}
 
