@@ -54,7 +54,6 @@ export default {
       const data = this.queryView ? { view: true } : {};
       const cond = this.queryCondition;
       (typeof cond === 'object') && Object.assign(data, cond);
-
       const action = `获取${this.subject}数据`;
       const onsuccess = (res) => {
         this.data = res.data;

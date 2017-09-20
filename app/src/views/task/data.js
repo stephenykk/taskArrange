@@ -51,6 +51,7 @@ const newTask = {
   frequency: 'daily'
 };
 
+
 export default {
   taskTypes,
   requiredFields,

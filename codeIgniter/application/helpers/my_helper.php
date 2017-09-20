@@ -146,3 +146,4 @@ function yearBegins()
     $m = $now->format('n');
     return intval($d) === 1 && intval($m) === 1; // first day of year
 }
+

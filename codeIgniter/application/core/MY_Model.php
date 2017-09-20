@@ -23,21 +23,32 @@ class MY_Model extends CI_Model{
 	public function __construct() {
 		parent::__construct();
 
+    /*
     if (!empty($this->table)) {
       $this->getTotal(false);
     }
 
     if (!empty($this->vtable)) {
     	$this->getTotal(true);
-    }
+    }*/
+
 	}
 
-  public function getTotal($isView)
+  public function getTotal($isView, $cond = array())
   {
+    if (!empty($cond)) {
+        if (isset($cond['kwlike'])) {
+            $this->db->group_start()->or_like($cond['kwlike'])->group_end();
+            unset($cond['kwlike']);
+        }
+        $this->db->where($cond);
+    }
+    $this->db->from($isView ? $this->vtable : $this->table);
+    $total = $this->db->count_all_results();
 
-  	$sql = 'select count(*) as total from ' . ($isView ? $this->vtable : $this->table);
-    $query = $this->db->query($sql);
-    $total = intval($query->row()->total);
+  	// $sql = 'select count(*) as total from ' . ($isView ? $this->vtable : $this->table);
+   //  $query = $this->db->query($sql);
+   //  $total = intval($query->row()->total);
 
     if ($isView) {
     	$this->vtotal = $total;
@@ -110,14 +121,14 @@ class MY_Model extends CI_Model{
 
 	public function _find($condition='', $fields=array(), $limits=array(), $order='')
 	{
-    if (!empty($fields)) {
-      $this->db->select($fields);
-    }
+        if (!empty($fields)) {
+          $this->db->select($fields);
+        }
 
-    if (!empty($limits)) {
-      list($offset, $size) = $limits;
-      $this->db->limit($size, $offset); // limit(size, offset)
-    }
+        if (!empty($limits)) {
+          list($offset, $size) = $limits;
+          $this->db->limit($size, $offset); // limit(size, offset)
+        }
 
 		if (empty($order)) {
 			$order = ($this->queryFromView ? $this->vid : $this->id) . ' DESC'; // 默认id字段倒序
@@ -128,6 +139,11 @@ class MY_Model extends CI_Model{
 		$tbl = $this->queryFromView ? $this->vtable : $this->table;
 
 		if ($condition) {
+            if (isset($condition['kwlike'])) {
+                $this->db->group_start()->or_like($condition['kwlike'])->group_end();
+                unset($condition['kwlike']);
+            }
+            
 			$query = $this->db->get_where($tbl, $condition);
 		} else {
 			$query = $this->db->get($tbl);
@@ -154,7 +170,8 @@ class MY_Model extends CI_Model{
         
         // 若为分页请求 则加上总记录数
         if (!empty($limits)) {
-          $res['total'] = $this->total;
+          $total = $this->getTotal($this->queryFromView, $condition);
+          $res['total'] = $total;
         }
 
         return $res;

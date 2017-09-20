@@ -62,7 +62,17 @@ class Home extends CI_Controller {
 		
         $fields = $this->input->get('fields');
         print_r($fields);
-        
+ 
+        $this->db->or_like(array('foo'=> 'foolish', 'bar'=> 'cute', 'hi'=> "hello"));
+        $sql = $this->db->get_compiled_select('users');
+        echo $sql;
+
+        $fields = array('foo', 'bar');
+        echo '<p/>';
+        foreach ($fields as $i => $val) {
+            echo $i . ':' .$val . '--->';
+        }
+
         // echoln($this->hi() . ", ---");
         // echoln("{$this->hi()}, ---");
 
@@ -81,7 +91,7 @@ class Home extends CI_Controller {
         // $res = $this->userModel->get('', array('id', 'name'));
         // output($res);
 
-        echoln($this->userModel->count);
+        // echoln($this->userModel->count);
 
 	}
 

@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('not directly access allow');
 
 class MY_Controller extends CI_Controller {
 	public $model;
+	public $kwFields = array(); // 根据关键字模糊搜索的字段
 
 	public function __construct()
 	{
@@ -74,6 +75,17 @@ class MY_Controller extends CI_Controller {
 		if (isset($condition['fields'])) {
 			$fields = $condition['fields'];
 			unset($condition['fields']);
+		}
+		if (isset($condition['kw'])) {
+			$kw = $condition['kw'];
+			$likeCond = array();
+			foreach ($this->kwFields as $fd) {
+				$likeCond[$fd] = $kw;
+			}
+			if (!empty($likeCond)) {
+				$condition['kwlike'] = $likeCond;
+			}
+			unset($condition['kw']);
 		}
 
 		$queryFromView = false;

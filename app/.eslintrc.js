@@ -62,6 +62,8 @@ module.exports = {
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
     'no-cond-assign': 0,
-    'camelcase': 0
+    'camelcase': 0,
+    'indent': 0,
+    'prefer-const': 0
   }
 }
