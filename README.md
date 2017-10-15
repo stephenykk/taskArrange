@@ -28,8 +28,8 @@ wamp在8088端口设置的虚拟站点, 映射到ci框架的根目录提供接�
 
 ### 更新注意点
 - oa和taskArrange的电脑都不能联网，都要mstsc过去
-- oa (10.40.72.37 pwd: xxx)
-- taskArrange (10.40.x.x pwd: xx)
+- oa (10.40.72.37 pwd: 5878842 or empty) 桌面有快捷方式指向源代码文件夹 oa-system
+- taskArrange (http://10.40.72.155:8088 pwd: as above) taskArrange-system
 
 
 部署
