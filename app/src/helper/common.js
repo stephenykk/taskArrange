@@ -102,7 +102,7 @@ export const renameField = (arr, oldName, newName) => {
 export const pagingParams = paging => {
   let params = {
     pagenum: 1,
-    pagesize: 10
+    pagesize: 30
   };
   if (P.isObject(paging)) {
     params = {
@@ -222,6 +222,33 @@ export const d2 = (n) => {
   return (n < 10 ? '0' : '') + n;
 };
 
+export function fetchUsers(query, cb) {
+  function doSearch(query, cb) {
+    axios
+      .post(getApi('user/searchByName'), {
+        name: query.trim()
+      })
+      .then(res => {
+        if (res.ok) {
+          const users = renameField(res.data, 'name', 'value');
+          cb(users);
+        } else {
+          cb([]);
+        }
+      });
+  }
+  
+  if (this.timer) {
+    clearTimeout(this.timer);
+  }
+  this.timer = setTimeout(() => {
+    doSearch(query, cb);
+  }, 600);
+
+  
+} 
+
+
 const common = {
   getApi,
   checkTopNav,
@@ -235,7 +262,8 @@ const common = {
   getAvatarUrl,
   pickerShortcuts,
   checkLogin,
-  d2
+  d2,
+  fetchUsers
 };
 
 export default common;

@@ -2,7 +2,13 @@
   <div class="task-searchbar mt20">
     <el-form inline label-width="60px" label-suffix=": ">
       <el-form-item label="关键字">
-        <el-input v-model="searching.kw" placeholder="任务名 / 任务内容" @keyup.native.enter="search"></el-input>
+        <el-input v-model="searching.kw" placeholder="任务名 / 任务内容" @keyup.native.enter="search" auto-complete="on"></el-input>
+      </el-form-item>
+      <el-form-item label="负责人" v-if="userCondition">
+          <el-autocomplete v-model="recieverName" placeholder="负责人用户名" :fetch-suggestions="fetchUsers" icon="circle-close" :on-icon-click="() => {recieverName = ''}" :trigger-on-focus="true" @select="onSelectReciever"></el-autocomplete>
+      </el-form-item>
+      <el-form-item label="创建人" v-if="userCondition">
+          <el-autocomplete v-model="creatorName" placeholder="创建人用户名" :fetch-suggestions="fetchUsers" icon="circle-close" :on-icon-click="() => {creatorName = ''}" :trigger-on-focus="true" @select="onSelectCreator"></el-autocomplete>
       </el-form-item>
       <el-form-item label="类型">
         <el-select v-model="searching.frequency">
@@ -28,6 +34,8 @@
 	import data from './data';
 
 	const defSearching = {
+        creator: '',
+        reciever: '',
 		kw: '',
 		frequency: '',
 		status: ''        
@@ -37,14 +45,31 @@
 
 	export default {
 		name: 'TaskSearchbar',
+        props: {
+            userCondition: {
+                type: Boolean,
+                default: true
+            }
+        },
 		data() {
 			return {
+                recieverName: '',
+                creatorName: '',
 				searching: Object.assign({}, defSearching),
 				statusMap,
 				taskTypes
 			};
 		},
 		methods: {
+            onSelectReciever(user) {
+                this.searching.reciever = user.id;
+                this.recieverName = user.value;
+            },
+            onSelectCreator(user) {
+                this.searching.creator = user.id;
+                this.creatorName = user.value;
+            },
+            fetchUsers: P.fetchUsers,
 			search() {
 				let data = P.filterKey(this.searching, v => !!v);
 				this.$emit('search', data);
@@ -57,10 +82,16 @@
 	};
 </script>
 
-<style>
+<style lang="scss">
 	.task-searchbar {
         .el-select {
-            width: 180px;
+            width: 120px;
+            .el-input {
+                width: 100%;
+            }
+        }
+        .el-input {
+            width: 150px
         }
 	}
 </style>

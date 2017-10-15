@@ -15,7 +15,7 @@ class User extends MY_Controller {
   public function insert()
   {
     $data = inputData($this);
-    if (array_keys($data) != array('name', 'pwd')) {// 非注册，而是通过管理页新增用户
+    if (array_keys($data) != array('name', 'nick_name', 'pwd')) {// 非注册，而是通过管理页新增用户
       $this->checkAuth('roleUserCreate');
     }
 

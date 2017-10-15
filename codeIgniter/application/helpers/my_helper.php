@@ -44,6 +44,7 @@ function output($data='')
 	if (empty($data)) {
 		$data = error('no data for output..');
 	}
+  header('content-type: application/json; charset=UTF-8');
 	echo(json_encode($data));
 }
 

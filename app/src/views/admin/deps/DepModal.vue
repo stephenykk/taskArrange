@@ -15,7 +15,7 @@
         </el-form-item>
 
         <el-form-item label="负责人: ">
-          <el-autocomplete v-model="managerName" placeholder="输入用户名搜索" :fetch-suggestions="fetchUsers" icon="circle-close" :on-icon-click="clearInput" :trigger-on-focus="false" @select="selectUser"></el-autocomplete>
+          <el-autocomplete v-model="managerName" placeholder="输入用户名搜索" :fetch-suggestions="fetchUsers" icon="circle-close" :on-icon-click="clearInput" :trigger-on-focus="true" @select="selectUser"></el-autocomplete>
         </el-form-item>
       </el-form>
 
@@ -31,6 +31,8 @@
   import modalMixin from 'mixins/modal';
   import formMixin from 'mixins/form';
 
+  // let {fetchUsers} = P;
+
   export default {
     name: 'DepModal',
     mixins: [modalMixin, formMixin],
@@ -41,29 +43,7 @@
       };
     },
     methods: {
-      doSearch(query, cb) {
-        axios
-          .post(P.getApi('user/searchByName'), {
-            name: query.trim()
-          })
-          .then(res => {
-            if (res.ok) {
-              const users = P.renameField(res.data, 'name', 'value');
-              cb(users);
-            } else {
-              cb([]);
-            }
-          });
-      },
-      fetchUsers(query, cb) {
-        if (this.timer) {
-          clearTimeout(this.timer);
-        }
-        this.timer = setTimeout(() => {
-          this.doSearch(query, cb);
-        }, 600);
-
-      },
+      fetchUsers: P.fetchUsers,
       clearInput() {
         this.managerName = '';
       },

@@ -18,8 +18,8 @@ export default {
       defPaging: {
         currentPage: 1,
         total: 0,
-        pageSize: 10,
-        pageSizes: [5, 10, 20, 30],
+        pageSize: 30,
+        pageSizes: [30, 50, 100, 200],
         layout: 'sizes, prev, pager, next'
       }
     };
@@ -33,6 +33,7 @@ export default {
       this.$emit('paging-change', this.paging);
     },
     setPageSize(n) {
+      console.log('pagesize change..');
       this.paging.pageSize = n;
       this.$emit('paging-change', this.paging);
     }

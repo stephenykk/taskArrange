@@ -114,7 +114,8 @@
             data.assign_time = P.formatDatetime();
           }
 
-          ['assignerName', 'creatorName', 'recieverName'].forEach(field => {
+
+          ['assignerNickname', 'creatorNickname', 'recieverNickname', 'assignerName', 'creatorName', 'recieverName'].forEach(field => {
             delete data[field];
           });
         }

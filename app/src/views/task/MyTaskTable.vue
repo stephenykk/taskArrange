@@ -2,14 +2,19 @@
   <div class="task-table">
     <el-table border stripe :data="data">
       <el-table-column type="index" label="序号" width="70"></el-table-column>
-      <el-table-column prop="title" label="任务名称"></el-table-column>
-      <el-table-column prop="content"  label="任务内容" width="200px"></el-table-column>
-      <el-table-column prop="frequency" label="任务类型">
+      <el-table-column prop="title" label="任务名称"  width="120"></el-table-column>
+      <el-table-column prop="content"  label="任务内容" min-width="150px"></el-table-column>
+      <el-table-column prop="frequency" label="任务类型" width="120">
         <template scope="scope">
           {{scope.row.frequency | taskTypeText}}
         </template>
       </el-table-column>
-      <el-table-column prop="assignerName" label="分派人"></el-table-column>
+      <el-table-column prop="assignerName" label="分派人"  width="120">
+        <template scope="scope">
+          <p>{{scope.row.assignerName}}</p>
+          <p>({{scope.row.assignerNickname}})</p>
+        </template>
+      </el-table-column>
       <el-table-column prop="status" label="状态">
         <template scope="scope">
           {{scope.row.status | statusText}}
@@ -48,7 +53,8 @@
     props: {
       order: {
         type: String,
-        default: 'frequency desc, recieverName asc'
+        // default: 'frequency desc, recieverName asc'
+        default: 'task_end asc, task_start asc, recieve_time asc'
       }
     },
     methods: {

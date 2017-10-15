@@ -10,6 +10,7 @@
       </template>
     </el-table-column>    
     <el-table-column prop="userName" label="用户名"></el-table-column>    
+    <el-table-column prop="userNickName" label="昵称"></el-table-column>    
     <el-table-column prop="userPwd" label="密码"></el-table-column>    
     <el-table-column prop="userMobile" label="手机"></el-table-column>    
     <el-table-column prop="userPosition" label="职称"></el-table-column>    

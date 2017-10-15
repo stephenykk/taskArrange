@@ -24,6 +24,9 @@
               <el-form-item label="用户名:" prop="name">
                 <el-input v-model="regForm.name" placeholder="字母或数字组成" :minlength="3" :maxlength="20"></el-input>
               </el-form-item>
+              <el-form-item label="昵称:" prop="nick_name">
+                <el-input v-model="regForm.nick_name" :maxlength="20" :minlength="2" placeholder="可用中文昵称"></el-input>
+              </el-form-item>
               <el-form-item label="密码:"  prop="pwd">
                 <el-input type="password" v-model="regForm.pwd" :minlength="3" :maxlength="20" placeholder="大于3位字母或数字"></el-input>
               </el-form-item>
@@ -65,6 +68,7 @@
         },
         regForm: {
           name: '',
+          nick_name: '',
           pwd: '',
           pwd2: ''
         },
@@ -131,10 +135,10 @@
       },
       reg() {
         this.validateForm('regForm', () => {
-          const {name, pwd} = this.regForm;
+          const {name, nick_name, pwd} = this.regForm;
 
           axios
-          .post(P.getApi('user/insert'), {name, pwd})
+          .post(P.getApi('user/insert'), {name, nick_name, pwd})
           .then(res => {
             P.log('res:', res);
             if (res.ok) {
